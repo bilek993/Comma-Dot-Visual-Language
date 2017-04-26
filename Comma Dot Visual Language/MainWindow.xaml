@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Comma_Dot_Visual_Language"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="720" Width="1280">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File"/>
+            <MenuItem Header="_Add">
+                <MenuItem Header="Input Block" Click="MenuAdddInputBlockClick"/>
+            </MenuItem>
+            <MenuItem Header="_Build"/>
+            <MenuItem Header="_Tools"/>
+            <MenuItem Header="_Help"/>
+        </Menu>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Canvas Name="CanvasBlocks" Grid.ColumnSpan="3" Grid.RowSpan="3" ClipToBounds="True"/>
+        </Grid>
+    </DockPanel>
 </Window>

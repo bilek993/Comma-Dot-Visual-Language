@@ -20,9 +20,18 @@ namespace Comma_Dot_Visual_Language
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Block> _blocks;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _blocks = new List<Block>();
+        }
+
+        private void MenuAdddInputBlockClick(object sender, RoutedEventArgs e)
+        {
+            _blocks.Add(new InputBlock(CanvasBlocks));
         }
     }
 }
