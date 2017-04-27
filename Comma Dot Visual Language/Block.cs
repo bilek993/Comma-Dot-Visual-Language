@@ -75,8 +75,8 @@ namespace Comma_Dot_Visual_Language
             double top = mousePosition.Y - (Shape.ActualHeight / 2);
             Canvas.SetLeft(Shape, left);
             Canvas.SetTop(Shape, top);
-            Canvas.SetLeft(TextBlockCommand,left + 28);
-            Canvas.SetTop(TextBlockCommand,top + 5);
+            Canvas.SetLeft(TextBlockCommand,left + Shape.ActualWidth / 2 - TextBlockCommand.ActualWidth / 2);
+            Canvas.SetTop(TextBlockCommand,top + Shape.ActualHeight / 2 - TextBlockCommand.ActualHeight / 2);
         }
 
         protected void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
