@@ -43,5 +43,11 @@ namespace Comma_Dot_Visual_Language
             _blocks.Add(new InputBlock(CanvasBlocks));
             _blocks[_blocks.Count - 1].Command = "Input: A";
         }
+
+        private void MenuAddEndBlockClick(object sender, RoutedEventArgs e)
+        {
+            _blocks.Add(new EndBlock(CanvasBlocks));
+            _blocks[_blocks.Count - 1].Command = "End";
+        }
     }
 }

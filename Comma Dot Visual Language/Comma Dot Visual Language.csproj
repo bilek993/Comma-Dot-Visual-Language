@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="BeginBlock.cs" />
     <Compile Include="Block.cs" />
+    <Compile Include="EndBlock.cs" />
     <Compile Include="InputBlock.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

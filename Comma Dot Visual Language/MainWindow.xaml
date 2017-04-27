@@ -11,6 +11,7 @@
             <MenuItem Header="_File"/>
             <MenuItem Header="_Add">
                 <MenuItem Header="Input Block" Click="MenuAdddInputBlockClick"/>
+                <MenuItem Header="End Block" Click="MenuAddEndBlockClick"/>
             </MenuItem>
             <MenuItem Header="_Build"/>
             <MenuItem Header="_Tools"/>
