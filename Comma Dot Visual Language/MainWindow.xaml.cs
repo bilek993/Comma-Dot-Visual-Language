@@ -21,6 +21,7 @@ namespace Comma_Dot_Visual_Language
     public partial class MainWindow : Window
     {
         private List<Block> _blocks;
+        private static Vector _beginStartPositon = new Vector(350,100);
 
         public MainWindow()
         {
@@ -34,7 +35,7 @@ namespace Comma_Dot_Visual_Language
         {
             _blocks.Add(new BeginBlock(CanvasBlocks));
             _blocks[_blocks.Count - 1].Command = "Start";
-            _blocks[_blocks.Count - 1].SetPositon(300,10); // TODO: Fix magic numbers and position not setting correctly
+            _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X,_beginStartPositon.Y);
         }
 
         private void MenuAdddInputBlockClick(object sender, RoutedEventArgs e)

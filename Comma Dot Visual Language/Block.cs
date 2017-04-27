@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -81,8 +82,19 @@ namespace Comma_Dot_Visual_Language
         {
             Canvas.SetLeft(Shape, left);
             Canvas.SetTop(Shape, top);
-            Canvas.SetLeft(TextBlockCommand, left + Shape.ActualWidth / 2 - TextBlockCommand.ActualWidth / 2);
-            Canvas.SetTop(TextBlockCommand, top + Shape.ActualHeight / 2 - TextBlockCommand.ActualHeight / 2);
+
+            if (Shape.ActualWidth != 0 && Shape.ActualHeight != 0)
+            {
+                Canvas.SetLeft(TextBlockCommand, left + Shape.ActualWidth / 2 - TextBlockCommand.ActualWidth / 2);
+                Canvas.SetTop(TextBlockCommand, top + Shape.ActualHeight / 2 - TextBlockCommand.ActualHeight / 2);
+            }
+            else
+            {
+                Shape.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                TextBlockCommand.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Canvas.SetLeft(TextBlockCommand, left + Shape.DesiredSize.Width / 2 - TextBlockCommand.DesiredSize.Width / 2);
+                Canvas.SetTop(TextBlockCommand, top + Shape.DesiredSize.Height / 2 - TextBlockCommand.DesiredSize.Height / 2);
+            }
         }
 
         protected void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
