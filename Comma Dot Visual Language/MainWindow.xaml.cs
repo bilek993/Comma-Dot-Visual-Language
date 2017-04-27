@@ -38,7 +38,7 @@ namespace Comma_Dot_Visual_Language
         private void MenuAdddInputBlockClick(object sender, RoutedEventArgs e)
         {
             _blocks.Add(new InputBlock(CanvasBlocks));
-            _blocks[_blocks.Count - 1].UpdateCommand("Input: A");
+            _blocks[_blocks.Count - 1].Command = "Input: A";
         }
     }
 }

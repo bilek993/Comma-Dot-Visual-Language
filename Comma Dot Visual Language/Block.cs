@@ -13,7 +13,6 @@ namespace Comma_Dot_Visual_Language
     abstract class Block
     {
         public int Id { get; private set; }
-        public string Command { get; private set; }
         public static int BlocksCounter = 0;
         public Block NextBlockPrimary { get; set; }
         public Block NextBlockOptional { get; set; }
@@ -23,10 +22,24 @@ namespace Comma_Dot_Visual_Language
         protected TextBlock TextBlockCommand;
         protected bool IsPressed;
 
+        private string _command = "";
+
+        public string Command
+        {
+            get
+            {
+                return _command;
+            }
+            set
+            {
+                _command = value;
+                TextBlockCommand.Text = value;
+            }
+        }
+
         protected Block(Canvas canvas)
         {
             Id = BlocksCounter++;
-            Command = "";
             CanvasBlocks = canvas;
         }
 
@@ -50,12 +63,6 @@ namespace Comma_Dot_Visual_Language
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
-        }
-
-        public void UpdateCommand(string newCommand)
-        {
-            Command = newCommand;
-            TextBlockCommand.Text = Command;
         }
 
         protected void OnMouseMove(object sender, MouseEventArgs mouseEventArgs)
