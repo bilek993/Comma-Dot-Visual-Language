@@ -30,8 +30,16 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <Canvas Name="CanvasBlocks" Grid.ColumnSpan="3" Grid.RowSpan="3" ClipToBounds="True"/>
+
+            <Border Grid.ColumnSpan="3" Grid.RowSpan="3" BorderBrush="WhiteSmoke" BorderThickness="1">
+                <Canvas Name="CanvasBlocks" ClipToBounds="True"/>
+            </Border>
+            <ScrollViewer  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                <TextBlock  Name="TerminalBlock"/>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="3" Grid.Row="0" Grid.RowSpan="4">
+                <Label Content="Properties:" FontSize="24" FontWeight="Medium"/>
+            </ScrollViewer>
         </Grid>
     </DockPanel>
 </Window>
