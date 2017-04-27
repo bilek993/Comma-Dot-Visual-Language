@@ -23,9 +23,10 @@ namespace Comma_Dot_Visual_Language
             };
 
             AddShapeToCanvas();
+            AddTextBlockToCanvas();
         }
 
-        public override String Run()
+        public override string Run()
         {
             throw new NotImplementedException();
         }
