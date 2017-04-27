@@ -32,7 +32,9 @@ namespace Comma_Dot_Visual_Language
 
         private void CreateBasicBlocks()
         {
-            
+            _blocks.Add(new BeginBlock(CanvasBlocks));
+            _blocks[_blocks.Count - 1].Command = "Start";
+            _blocks[_blocks.Count - 1].SetPositon(300,10); // TODO: Fix magic numbers and position not setting correctly
         }
 
         private void MenuAdddInputBlockClick(object sender, RoutedEventArgs e)

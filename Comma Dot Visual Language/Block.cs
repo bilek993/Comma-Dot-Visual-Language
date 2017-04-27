@@ -74,12 +74,15 @@ namespace Comma_Dot_Visual_Language
                 return;
 
             var mousePosition = mouseEventArgs.GetPosition(CanvasBlocks);
-            double left = mousePosition.X - (Shape.ActualWidth / 2);
-            double top = mousePosition.Y - (Shape.ActualHeight / 2);
+            SetPositon(mousePosition.X - (Shape.ActualWidth / 2), mousePosition.Y - (Shape.ActualHeight / 2));
+        }
+
+        public void SetPositon(double left, double top)
+        {
             Canvas.SetLeft(Shape, left);
             Canvas.SetTop(Shape, top);
-            Canvas.SetLeft(TextBlockCommand,left + Shape.ActualWidth / 2 - TextBlockCommand.ActualWidth / 2);
-            Canvas.SetTop(TextBlockCommand,top + Shape.ActualHeight / 2 - TextBlockCommand.ActualHeight / 2);
+            Canvas.SetLeft(TextBlockCommand, left + Shape.ActualWidth / 2 - TextBlockCommand.ActualWidth / 2);
+            Canvas.SetTop(TextBlockCommand, top + Shape.ActualHeight / 2 - TextBlockCommand.ActualHeight / 2);
         }
 
         protected void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
