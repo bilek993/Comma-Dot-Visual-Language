@@ -46,9 +46,7 @@ namespace Comma_Dot_Visual_Language
         protected void AddShapeToCanvas()
         {
             CanvasBlocks.Children.Add(Shape);
-            CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
-            CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
-            CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
+            ChildrenAddEvents();
         }
 
         protected void AddTextBlockToCanvas()
@@ -60,6 +58,11 @@ namespace Comma_Dot_Visual_Language
             };
 
             CanvasBlocks.Children.Add(TextBlockCommand);
+            ChildrenAddEvents();
+        }
+
+        private void ChildrenAddEvents()
+        {
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
