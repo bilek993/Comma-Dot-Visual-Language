@@ -15,7 +15,7 @@ namespace Comma_Dot_Visual_Language
     {
         public InputBlock(Canvas canvas) : base(canvas)
         {
-            _shape = new Polygon()
+            Shape = new Polygon()
             {
                 Stroke = new SolidColorBrush(Colors.Black),
                 Fill = new SolidColorBrush(Colors.White),
@@ -24,6 +24,7 @@ namespace Comma_Dot_Visual_Language
 
             AddShapeToCanvas();
             AddTextBlockToCanvas();
+            OnMouseLeftButtonDown(null,null);
         }
 
         public override string Run()

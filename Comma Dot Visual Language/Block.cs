@@ -19,21 +19,20 @@ namespace Comma_Dot_Visual_Language
         public Block NextBlockOptional { get; set; }
 
         protected Canvas CanvasBlocks;
-        protected Shape _shape;
-        protected TextBlock _textBlockCommand;
-        protected bool _isPressed;
+        protected Shape Shape;
+        protected TextBlock TextBlockCommand;
+        protected bool IsPressed;
 
         protected Block(Canvas canvas)
         {
             Id = BlocksCounter++;
             Command = "";
             CanvasBlocks = canvas;
-            _isPressed = true;
         }
 
         protected void AddShapeToCanvas()
         {
-            CanvasBlocks.Children.Add(_shape);
+            CanvasBlocks.Children.Add(Shape);
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
@@ -41,13 +40,13 @@ namespace Comma_Dot_Visual_Language
 
         protected void AddTextBlockToCanvas()
         {
-            _textBlockCommand = new TextBlock()
+            TextBlockCommand = new TextBlock()
             {
                 Text = Command,
                 Foreground = new SolidColorBrush(Colors.Black)
             };
 
-            CanvasBlocks.Children.Add(_textBlockCommand);
+            CanvasBlocks.Children.Add(TextBlockCommand);
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
@@ -56,33 +55,33 @@ namespace Comma_Dot_Visual_Language
         public void UpdateCommand(string newCommand)
         {
             Command = newCommand;
-            _textBlockCommand.Text = Command;
+            TextBlockCommand.Text = Command;
         }
 
         protected void OnMouseMove(object sender, MouseEventArgs mouseEventArgs)
         {
-            if (!_isPressed)
+            if (!IsPressed)
                 return;
 
             var mousePosition = mouseEventArgs.GetPosition(CanvasBlocks);
-            double left = mousePosition.X - (_shape.ActualWidth / 2);
-            double top = mousePosition.Y - (_shape.ActualHeight / 2);
-            Canvas.SetLeft(_shape, left);
-            Canvas.SetTop(_shape, top);
-            Canvas.SetLeft(_textBlockCommand,left + 28);
-            Canvas.SetTop(_textBlockCommand,top + 5);
+            double left = mousePosition.X - (Shape.ActualWidth / 2);
+            double top = mousePosition.Y - (Shape.ActualHeight / 2);
+            Canvas.SetLeft(Shape, left);
+            Canvas.SetTop(Shape, top);
+            Canvas.SetLeft(TextBlockCommand,left + 28);
+            Canvas.SetTop(TextBlockCommand,top + 5);
         }
 
         protected void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            _shape.ReleaseMouseCapture();
-            _isPressed = false;
+            Shape.ReleaseMouseCapture();
+            IsPressed = false;
         }
 
         protected void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            _shape.CaptureMouse();
-            _isPressed = true;
+            Shape.CaptureMouse();
+            IsPressed = true;
         }
 
         public abstract string Run();
