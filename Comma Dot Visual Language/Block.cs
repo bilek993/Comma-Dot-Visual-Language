@@ -35,10 +35,7 @@ namespace Comma_Dot_Visual_Language
 
         public string Command
         {
-            get
-            {
-                return _command;
-            }
+            get => _command;
             set
             {
                 _command = value;
@@ -47,7 +44,7 @@ namespace Comma_Dot_Visual_Language
         }
         public double ConnectionX
         {
-            get { return _connectionX; }
+            get => _connectionX;
             set
             {
                 _connectionX = value;
@@ -56,7 +53,7 @@ namespace Comma_Dot_Visual_Language
         }
         public double ConnectionY
         {
-            get { return _connectionY; }
+            get => _connectionY;
             set
             {
                 _connectionY = value;
@@ -158,24 +155,32 @@ namespace Comma_Dot_Visual_Language
 
             CanvasBlocks.Children.Add(ConnectionPrimary);
 
-            Binding binding = new Binding();
-            binding.Source = this;
-            binding.Path = new PropertyPath("ConnectionX");
+            Binding binding = new Binding
+            {
+                Source = this,
+                Path = new PropertyPath("ConnectionX")
+            };
             ConnectionPrimary.SetBinding(Line.X1Property, binding);
 
-            binding = new Binding();
-            binding.Source = this;
-            binding.Path = new PropertyPath("ConnectionY");
+            binding = new Binding
+            {
+                Source = this,
+                Path = new PropertyPath("ConnectionY")
+            };
             ConnectionPrimary.SetBinding(Line.Y1Property, binding);
 
-            binding = new Binding();
-            binding.Source = block;
-            binding.Path = new PropertyPath("ConnectionX");
+            binding = new Binding
+            {
+                Source = block,
+                Path = new PropertyPath("ConnectionX")
+            };
             ConnectionPrimary.SetBinding(Line.X2Property, binding);
 
-            binding = new Binding();
-            binding.Source = block;
-            binding.Path = new PropertyPath("ConnectionY");
+            binding = new Binding
+            {
+                Source = block,
+                Path = new PropertyPath("ConnectionY")
+            };
             ConnectionPrimary.SetBinding(Line.Y2Property, binding);
         }
 

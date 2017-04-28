@@ -11,8 +11,8 @@ namespace Comma_Dot_Visual_Language
     public class BlockManager
     {
         private static Vector _beginStartPositon = new Vector(350, 100);
-        private List<Block> _blocks;
-        private Canvas _canvasBlocks;
+        private readonly List<Block> _blocks;
+        private readonly Canvas _canvasBlocks;
 
         public static bool IsAddConectionMode = false;
         public static Block FirstBlockForConnection;

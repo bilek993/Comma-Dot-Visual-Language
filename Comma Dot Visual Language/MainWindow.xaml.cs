@@ -20,7 +20,7 @@ namespace Comma_Dot_Visual_Language
     /// </summary>
     public partial class MainWindow : Window
     {
-        private BlockManager _blockManager;
+        private readonly BlockManager _blockManager;
 
         public MainWindow()
         {
