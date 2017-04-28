@@ -14,7 +14,9 @@
                 <MenuItem Header="End Block" Click="MenuAddEndBlockClick"/>
             </MenuItem>
             <MenuItem Header="_Build"/>
-            <MenuItem Header="_Tools"/>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="Add connection" Click="MenuAddConnectionClick" />
+            </MenuItem>
             <MenuItem Header="_Help"/>
         </Menu>
 

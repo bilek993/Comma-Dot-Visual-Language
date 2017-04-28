@@ -20,34 +20,30 @@ namespace Comma_Dot_Visual_Language
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Block> _blocks;
-        private static Vector _beginStartPositon = new Vector(350,100);
+        private BlockManager _blockManager;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _blocks = new List<Block>();
-            CreateBasicBlocks();
-        }
+            _blockManager = new BlockManager(CanvasBlocks);
 
-        private void CreateBasicBlocks()
-        {
-            _blocks.Add(new BeginBlock(CanvasBlocks));
-            _blocks[_blocks.Count - 1].Command = "Start";
-            _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X,_beginStartPositon.Y);
+            _blockManager.CreateBasicBlocks();
         }
 
         private void MenuAdddInputBlockClick(object sender, RoutedEventArgs e)
         {
-            _blocks.Add(new InputBlock(CanvasBlocks));
-            _blocks[_blocks.Count - 1].Command = "Input: A";
+            _blockManager.CreateInputBlock();
         }
 
         private void MenuAddEndBlockClick(object sender, RoutedEventArgs e)
         {
-            _blocks.Add(new EndBlock(CanvasBlocks));
-            _blocks[_blocks.Count - 1].Command = "End";
+            _blockManager.CreateEndBlock();
+        }
+
+        private void MenuAddConnectionClick(object sender, RoutedEventArgs e)
+        {
+            BlockManager.IsAddConectionMode = true;
         }
     }
 }
