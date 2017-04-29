@@ -44,6 +44,7 @@ namespace Comma_Dot_Visual_Language
         private void MenuAddConnectionClick(object sender, RoutedEventArgs e)
         {
             BlockManager.IsAddConectionMode = true;
+            Mouse.OverrideCursor = Cursors.Pen;
         }
     }
 }

@@ -137,6 +137,7 @@ namespace Comma_Dot_Visual_Language
                     BlockManager.FirstBlockForConnection = this;
                 else
                 {
+                    Mouse.OverrideCursor = null;
                     BlockManager.SecondBlockForConnection = this;
                     BlockManager.AddConnection();
                 }
@@ -148,6 +149,12 @@ namespace Comma_Dot_Visual_Language
 
         public void AddConnection(Block block)
         {
+            if (BlockManager.FirstBlockForConnection == BlockManager.SecondBlockForConnection)
+            {
+                MessageBox.Show("Self connection is not possible due to potential endless loop.","Connection error!",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+
             ConnectionPrimary = new Line()
             {
                 Stroke = Brushes.Black
