@@ -26,7 +26,7 @@ namespace Comma_Dot_Visual_Language
             AddTextBlockToCanvas();
         }
 
-        public override string Run()
+        public override Block Run()
         {
             throw new NotImplementedException();
         }

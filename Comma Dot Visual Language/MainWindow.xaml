@@ -10,6 +10,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File"/>
             <MenuItem Header="_Add">
+                <MenuItem Header="Command Block" Click="MenuCommandBlockClick"/>
                 <MenuItem Header="Input Block" Click="MenuAdddInputBlockClick"/>
                 <MenuItem Header="Output Block" Click="MenuAddOutputBlockClick"/>
                 <MenuItem Header="End Block" Click="MenuAddEndBlockClick"/>
@@ -28,20 +29,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <Border Grid.ColumnSpan="3" Grid.RowSpan="3" BorderBrush="WhiteSmoke" BorderThickness="1">
+            <Border Grid.ColumnSpan="3" BorderBrush="WhiteSmoke" BorderThickness="1">
                 <Canvas Name="CanvasBlocks" ClipToBounds="True"/>
             </Border>
-            <ScrollViewer  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
-                <TextBlock  Name="TerminalBlock"/>
-            </ScrollViewer>
-            <ScrollViewer Grid.Column="3" Grid.Row="0" Grid.RowSpan="4">
+            <ScrollViewer Grid.Column="3">
                 <Label Content="Properties:" FontSize="24" FontWeight="Medium"/>
             </ScrollViewer>
         </Grid>

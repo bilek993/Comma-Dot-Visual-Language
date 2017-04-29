@@ -27,7 +27,7 @@ namespace Comma_Dot_Visual_Language
             OnMouseLeftButtonDown(null,null);
         }
 
-        public override string Run()
+        public override Block Run()
         {
             throw new NotImplementedException();
         }

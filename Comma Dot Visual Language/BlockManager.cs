@@ -31,6 +31,12 @@ namespace Comma_Dot_Visual_Language
             _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X, _beginStartPositon.Y);
         }
 
+        public void CreateCommandBlock()
+        {
+            _blocks.Add(new CommandBlock(_canvasBlocks));
+            _blocks[_blocks.Count - 1].Command = "Example(a)";
+        }
+
         public void CreateInputBlock()
         {
             _blocks.Add(new InputBlock(_canvasBlocks));

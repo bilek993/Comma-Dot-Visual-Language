@@ -197,6 +197,6 @@ namespace Comma_Dot_Visual_Language
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public abstract string Run();
+        public abstract Block Run();
     }
 }

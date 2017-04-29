@@ -10,15 +10,16 @@ using System.Windows.Shapes;
 
 namespace Comma_Dot_Visual_Language
 {
-    class OutputBlock : Block
+    class CommandBlock : Block
     {
-        public OutputBlock(Canvas canvas) : base(canvas)
+        public CommandBlock(Canvas canvas) : base(canvas)
         {
-            Shape = new Polygon()
+            Shape = new Rectangle()
             {
                 Stroke = new SolidColorBrush(Colors.Black),
                 Fill = new SolidColorBrush(Colors.White),
-                Points = { new Point(0, 0), new Point(20, 30), new Point(100, 30), new Point(80, 0) }
+                Width = 100,
+                Height = 30
             };
 
             AddShapeToCanvas();
