@@ -37,6 +37,12 @@ namespace Comma_Dot_Visual_Language
             _blocks[_blocks.Count - 1].Command = "Input: A";
         }
 
+        public void CreateOutputBlock()
+        {
+            _blocks.Add(new OutputBlock(_canvasBlocks));
+            _blocks[_blocks.Count - 1].Command = "Output: A";
+        }
+
         public void CreateEndBlock()
         {
             _blocks.Add(new EndBlock(_canvasBlocks));

@@ -36,6 +36,11 @@ namespace Comma_Dot_Visual_Language
             _blockManager.CreateInputBlock();
         }
 
+        private void MenuAddOutputBlockClick(object sender, RoutedEventArgs e)
+        {
+            _blockManager.CreateOutputBlock();
+        }
+
         private void MenuAddEndBlockClick(object sender, RoutedEventArgs e)
         {
             _blockManager.CreateEndBlock();
