@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Comma_Dot_Visual_Language"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="MainWindow" Height="720" Width="1280"
+        MinHeight="360" MinWidth="640">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File"/>
@@ -34,7 +35,23 @@
                 <Canvas Name="CanvasBlocks" ClipToBounds="True"/>
             </Border>
             <ScrollViewer Grid.Column="3">
-                <Label Content="Properties:" FontSize="24" FontWeight="Medium"/>
+                <StackPanel>
+                    <Label Content="Properties:" FontSize="24" FontWeight="Medium"/>
+                    <Label Content="Id: ???"/>
+                    <DockPanel>
+                        <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
+                        <Label Content="Nextblock primary: ???"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
+                        <Label Content="Nextblock optional: ???"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Command:" DockPanel.Dock="Left"/>
+                        <TextBox Margin="5"/>
+                    </DockPanel>
+                    <Button Content="Remove block"/>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
     </DockPanel>
