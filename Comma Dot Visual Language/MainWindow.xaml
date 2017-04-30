@@ -37,14 +37,19 @@
             <ScrollViewer Grid.Column="3">
                 <StackPanel>
                     <Label Content="Properties:" FontSize="24" FontWeight="Medium"/>
-                    <Label Content="Id: ???"/>
                     <DockPanel>
-                        <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
-                        <Label Content="Nextblock primary: ???"/>
+                        <Label Content="Id:"/>
+                        <Label Content="???"/>
                     </DockPanel>
                     <DockPanel>
                         <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
-                        <Label Content="Nextblock optional: ???"/>
+                        <Label Content="Output primary:"/>
+                        <Label Content="???"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
+                        <Label Content="Output optional:"/>
+                        <Label Content="???"/>
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Command:" DockPanel.Dock="Left"/>
