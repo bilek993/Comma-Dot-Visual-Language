@@ -11,7 +11,7 @@ namespace Comma_Dot_Visual_Language
 {
     class EndBlock : Block
     {
-        public EndBlock(Canvas canvas) : base(canvas)
+        public EndBlock(Canvas canvas) : base(canvas, 0)
         {
             Shape = new Ellipse()
             {

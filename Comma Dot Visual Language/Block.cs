@@ -21,6 +21,7 @@ namespace Comma_Dot_Visual_Language
         public static int BlocksCounter = 0;
         public Block NextBlockPrimary { get; private set; }
         public Block NextBlockOptional { get; private set; }
+        public int MaxConnectionsCount { get; private set; }
 
         protected Canvas CanvasBlocks;
         protected Shape Shape;
@@ -81,10 +82,11 @@ namespace Comma_Dot_Visual_Language
             }
         }
 
-        protected Block(Canvas canvas)
+        protected Block(Canvas canvas, int maxConnectionsCount)
         {
             Id = BlocksCounter++;
             CanvasBlocks = canvas;
+            MaxConnectionsCount = maxConnectionsCount;
         }
 
         protected void AddShapeToCanvas()
@@ -183,42 +185,48 @@ namespace Comma_Dot_Visual_Language
                 return;
             }
 
-            LineConnectionPrimary = new Line()
+            if (MaxConnectionsCount == 0)
+                return;
+
+            if (MaxConnectionsCount == 1 && NextBlockPrimary == null)
             {
-                Stroke = Brushes.Black
-            };
+                LineConnectionPrimary = new Line()
+                {
+                    Stroke = Brushes.Black
+                };
 
-            CanvasBlocks.Children.Add(LineConnectionPrimary);
+                CanvasBlocks.Children.Add(LineConnectionPrimary);
 
-            Binding binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("ConnectionOutputX")
-            };
-            LineConnectionPrimary.SetBinding(Line.X1Property, binding);
+                Binding binding = new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath("ConnectionOutputX")
+                };
+                LineConnectionPrimary.SetBinding(Line.X1Property, binding);
 
-            binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("ConnectionOutputY")
-            };
-            LineConnectionPrimary.SetBinding(Line.Y1Property, binding);
+                binding = new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath("ConnectionOutputY")
+                };
+                LineConnectionPrimary.SetBinding(Line.Y1Property, binding);
 
-            binding = new Binding
-            {
-                Source = block,
-                Path = new PropertyPath("ConnectionInputX")
-            };
-            LineConnectionPrimary.SetBinding(Line.X2Property, binding);
+                binding = new Binding
+                {
+                    Source = block,
+                    Path = new PropertyPath("ConnectionInputX")
+                };
+                LineConnectionPrimary.SetBinding(Line.X2Property, binding);
 
-            binding = new Binding
-            {
-                Source = block,
-                Path = new PropertyPath("ConnectionInputY")
-            };
-            LineConnectionPrimary.SetBinding(Line.Y2Property, binding);
+                binding = new Binding
+                {
+                    Source = block,
+                    Path = new PropertyPath("ConnectionInputY")
+                };
+                LineConnectionPrimary.SetBinding(Line.Y2Property, binding);
 
-            NextBlockPrimary = block;
+                NextBlockPrimary = block;
+            }
         }
 
         private void OnPropertyChanged(string propertyName)

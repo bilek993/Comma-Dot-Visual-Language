@@ -12,7 +12,7 @@ namespace Comma_Dot_Visual_Language
 {
     class OutputBlock : Block
     {
-        public OutputBlock(Canvas canvas) : base(canvas)
+        public OutputBlock(Canvas canvas) : base(canvas, 1)
         {
             Shape = new Polygon()
             {

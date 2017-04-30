@@ -12,7 +12,7 @@ namespace Comma_Dot_Visual_Language
 {
     class BeginBlock : Block
     {
-        public BeginBlock(Canvas canvas) : base(canvas)
+        public BeginBlock(Canvas canvas) : base(canvas, 1)
         {
             Shape = new Ellipse()
             {
