@@ -13,7 +13,7 @@ namespace Comma_Dot_Visual_Language
 {
     class InputBlock : Block
     {
-        public InputBlock(Canvas canvas) : base(canvas, 1)
+        public InputBlock(Canvas canvas, PropertiesManager propertiesManager) : base(canvas, 1, propertiesManager)
         {
             Shape = new Polygon()
             {

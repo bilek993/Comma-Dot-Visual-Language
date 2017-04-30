@@ -12,7 +12,7 @@ namespace Comma_Dot_Visual_Language
 {
     class CommandBlock : Block
     {
-        public CommandBlock(Canvas canvas) : base(canvas, 1)
+        public CommandBlock(Canvas canvas, PropertiesManager propertiesManager) : base(canvas, 1, propertiesManager)
         {
             Shape = new Rectangle()
             {

@@ -21,13 +21,15 @@ namespace Comma_Dot_Visual_Language
     public partial class MainWindow : Window
     {
         private readonly BlockManager _blockManager;
+        private readonly PropertiesManager _propertiesManager;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _blockManager = new BlockManager(CanvasBlocks);
+            _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, LabelOutputBlockOptional);
 
+            _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
             _blockManager.CreateBasicBlocks();
         }
 

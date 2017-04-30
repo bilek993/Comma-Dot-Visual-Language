@@ -35,6 +35,7 @@ namespace Comma_Dot_Visual_Language
         private double _connectionInputY;
         private double _connectionOutputX;
         private double _connectionOutputY;
+        private PropertiesManager _propertiesManager;
 
         public string Command
         {
@@ -82,11 +83,12 @@ namespace Comma_Dot_Visual_Language
             }
         }
 
-        protected Block(Canvas canvas, int maxConnectionsCount)
+        protected Block(Canvas canvas, int maxConnectionsCount, PropertiesManager propertiesManager)
         {
             Id = BlocksCounter++;
             CanvasBlocks = canvas;
             MaxConnectionsCount = maxConnectionsCount;
+            _propertiesManager = propertiesManager;
         }
 
         protected void AddShapeToCanvas()
@@ -172,6 +174,9 @@ namespace Comma_Dot_Visual_Language
                     BlockManager.AddConnection();
                 }
             }
+
+            _propertiesManager.SelectedBlock = this;
+            _propertiesManager.Update();
 
             Shape.CaptureMouse();
             IsPressed = true;

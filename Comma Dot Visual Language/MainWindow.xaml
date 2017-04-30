@@ -39,21 +39,21 @@
                     <Label Content="Properties:" FontSize="24" FontWeight="Medium"/>
                     <DockPanel>
                         <Label Content="Id:"/>
-                        <Label Content="???"/>
+                        <Label Name="LabelId" Content="???"/>
                     </DockPanel>
                     <DockPanel>
                         <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
                         <Label Content="Output primary:"/>
-                        <Label Content="???"/>
+                        <Label Name="LabelOutputBlockPrimary" Content="???"/>
                     </DockPanel>
                     <DockPanel>
                         <Button Content="Remove" DockPanel.Dock="Right" Margin="2"/>
                         <Label Content="Output optional:"/>
-                        <Label Content="???"/>
+                        <Label Name="LabelOutputBlockOptional" Content="???"/>
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Command:" DockPanel.Dock="Left"/>
-                        <TextBox Margin="5"/>
+                        <TextBox Name="TextBoxCommand" Margin="5"/>
                     </DockPanel>
                     <Button Content="Remove block"/>
                 </StackPanel>

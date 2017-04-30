@@ -13,45 +13,47 @@ namespace Comma_Dot_Visual_Language
         private static Vector _beginStartPositon = new Vector(350, 100);
         private readonly List<Block> _blocks;
         private readonly Canvas _canvasBlocks;
+        private PropertiesManager _propertiesManager;
 
         public static bool IsAddConectionMode = false;
         public static Block FirstBlockForConnection;
         public static Block SecondBlockForConnection;
 
-        public BlockManager(Canvas canvasBlocks)
+        public BlockManager(Canvas canvasBlocks, PropertiesManager propertiesManager)
         {
             _blocks = new List<Block>();
             _canvasBlocks = canvasBlocks;
+            _propertiesManager = propertiesManager;
         }
 
         public void CreateBasicBlocks()
         {
-            _blocks.Add(new BeginBlock(_canvasBlocks));
+            _blocks.Add(new BeginBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Start";
             _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X, _beginStartPositon.Y);
         }
 
         public void CreateCommandBlock()
         {
-            _blocks.Add(new CommandBlock(_canvasBlocks));
+            _blocks.Add(new CommandBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Example(a)";
         }
 
         public void CreateInputBlock()
         {
-            _blocks.Add(new InputBlock(_canvasBlocks));
+            _blocks.Add(new InputBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Input: A";
         }
 
         public void CreateOutputBlock()
         {
-            _blocks.Add(new OutputBlock(_canvasBlocks));
+            _blocks.Add(new OutputBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Output: A";
         }
 
         public void CreateEndBlock()
         {
-            _blocks.Add(new EndBlock(_canvasBlocks));
+            _blocks.Add(new EndBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "End";
         }
 
