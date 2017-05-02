@@ -53,12 +53,18 @@ namespace Comma_Dot_Visual_Language
             else
                 _labelOutputOptional.Content = NoneValue;
 
+            if (SelectedBlock.GetType() == typeof(BeginBlock) || SelectedBlock.GetType() == typeof(EndBlock))
+                _textBoxCommand.IsEnabled = false;
+            else
+                _textBoxCommand.IsEnabled = true;
+
             _textBoxCommand.Text = SelectedBlock.Command;
         }
 
         public void CommandChanged(string newCommand)
         {
-            SelectedBlock.Command = newCommand;
+            if (SelectedBlock != null)
+                SelectedBlock.Command = newCommand;
         }
     }
 }
