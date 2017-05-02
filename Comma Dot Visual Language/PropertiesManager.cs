@@ -14,13 +14,15 @@ namespace Comma_Dot_Visual_Language
         private readonly Label _labelId;
         private readonly Label _labelOutputPrimary;
         private readonly Label _labelOutputOptional;
+        private readonly TextBox _textBoxCommand;
         private const string NoneValue = "None";
 
-        public PropertiesManager(Label labelId, Label labelOutputPrimary, Label labelOutputOptional)
+        public PropertiesManager(Label labelId, Label labelOutputPrimary, Label labelOutputOptional, TextBox textBoxCommand)
         {
             _labelId = labelId;
             _labelOutputPrimary = labelOutputPrimary;
             _labelOutputOptional = labelOutputOptional;
+            _textBoxCommand = textBoxCommand;
 
             _labelId.Content = "";
             _labelOutputPrimary.Content = "";
@@ -50,6 +52,13 @@ namespace Comma_Dot_Visual_Language
                     SelectedBlock.NextBlockOptional.Command);
             else
                 _labelOutputOptional.Content = NoneValue;
+
+            _textBoxCommand.Text = SelectedBlock.Command;
+        }
+
+        public void CommandChanged(string newCommand)
+        {
+            SelectedBlock.Command = newCommand;
         }
     }
 }

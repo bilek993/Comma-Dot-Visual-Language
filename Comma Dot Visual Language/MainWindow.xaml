@@ -53,7 +53,7 @@
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Command:" DockPanel.Dock="Left"/>
-                        <TextBox Name="TextBoxCommand" Margin="5"/>
+                        <TextBox Name="TextBoxCommand" Margin="5" TextChanged="TextBoxCommandTextChanged"/>
                     </DockPanel>
                     <Button Content="Remove block"/>
                 </StackPanel>

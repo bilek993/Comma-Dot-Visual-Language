@@ -191,7 +191,10 @@ namespace Comma_Dot_Visual_Language
             }
 
             if (MaxConnectionsCount == 0)
+            {
+                MessageBox.Show("Outputs are not supported by this block.", "Connection error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
 
             if (MaxConnectionsCount != 1 || NextBlockPrimary != null)
             {

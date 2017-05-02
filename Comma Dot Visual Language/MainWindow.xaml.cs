@@ -27,7 +27,7 @@ namespace Comma_Dot_Visual_Language
         {
             InitializeComponent();
 
-            _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, LabelOutputBlockOptional);
+            _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, LabelOutputBlockOptional, TextBoxCommand);
 
             _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
             _blockManager.CreateBasicBlocks();
@@ -57,6 +57,11 @@ namespace Comma_Dot_Visual_Language
         {
             BlockManager.IsAddConectionMode = true;
             Mouse.OverrideCursor = Cursors.Pen;
+        }
+
+        private void TextBoxCommandTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _propertiesManager.CommandChanged(TextBoxCommand.Text);
         }
     }
 }
