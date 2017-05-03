@@ -51,6 +51,12 @@ namespace Comma_Dot_Visual_Language
             _blocks[_blocks.Count - 1].Command = "Output: A";
         }
 
+        public void CreateIfBlock()
+        {
+            _blocks.Add(new IfBlock(_canvasBlocks, _propertiesManager));
+            _blocks[_blocks.Count - 1].Command = "If (true)";
+        }
+
         public void CreateEndBlock()
         {
             _blocks.Add(new EndBlock(_canvasBlocks, _propertiesManager));

@@ -33,8 +33,10 @@ namespace Comma_Dot_Visual_Language
         private string _command = "";
         private double _connectionInputX;
         private double _connectionInputY;
-        private double _connectionOutputX;
-        private double _connectionOutputY;
+        private double _connectionOutput1X;
+        private double _connectionOutput1Y;
+        private double _connectionOutput2X;
+        private double _connectionOutput2Y;
         private PropertiesManager _propertiesManager;
 
         public string Command
@@ -64,22 +66,40 @@ namespace Comma_Dot_Visual_Language
                 OnPropertyChanged("ConnectionInputY");
             }
         }
-        public double ConnectionOutputX
+        public double ConnectionOutput1X
         {
-            get { return _connectionOutputX; }
+            get { return _connectionOutput1X; }
             set
             {
-                _connectionOutputX = value;
-                OnPropertyChanged("ConnectionOutputX");
+                _connectionOutput1X = value;
+                OnPropertyChanged("ConnectionOutput1X");
             }
         }
-        public double ConnectionOutputY
+        public double ConnectionOutput1Y
         {
-            get { return _connectionOutputY; }
+            get { return _connectionOutput1Y; }
             set
             {
-                _connectionOutputY = value;
-                OnPropertyChanged("ConnectionOutputY");
+                _connectionOutput1Y = value;
+                OnPropertyChanged("ConnectionOutput1Y");
+            }
+        }
+        public double ConnectionOutput2X
+        {
+            get { return _connectionOutput2X; }
+            set
+            {
+                _connectionOutput2X = value;
+                OnPropertyChanged("ConnectionOutput2X");
+            }
+        }
+        public double ConnectionOutput2Y
+        {
+            get { return _connectionOutput2Y; }
+            set
+            {
+                _connectionOutput2Y = value;
+                OnPropertyChanged("ConnectionOutput2Y");
             }
         }
 
@@ -151,8 +171,9 @@ namespace Comma_Dot_Visual_Language
 
             ConnectionInputX = shapeLeft + Shape.ActualWidth / 2;
             ConnectionInputY = shapeTop;
-            ConnectionOutputX = shapeLeft + Shape.ActualWidth / 2;
-            ConnectionOutputY = shapeTop + Shape.ActualHeight;
+
+            ConnectionOutput1X = ConnectionOutput2X = shapeLeft + Shape.ActualWidth / 2;
+            ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + Shape.ActualHeight;
         }
 
         protected void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
@@ -184,7 +205,7 @@ namespace Comma_Dot_Visual_Language
 
         public void AddConnection(Block block)
         {
-            if (BlockManager.FirstBlockForConnection == BlockManager.SecondBlockForConnection)
+            if (this == block)
             {
                 MessageBox.Show("Self connection is not possible due to potential endless loop.","Connection error!",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
@@ -196,48 +217,63 @@ namespace Comma_Dot_Visual_Language
                 return;
             }
 
-            if (MaxConnectionsCount != 1 || NextBlockPrimary != null)
+            if (NextBlockPrimary == null)
+            {
+                NextBlockPrimary = block;
+
+                LineConnectionPrimary = createConnectionLine(block, 1);
+            }
+            else if (MaxConnectionsCount == 2 && NextBlockOptional == null)
+            {
+                NextBlockOptional = block;
+
+                LineConnectionOptional = createConnectionLine(block, 2);
+            }
+            else
             {
                 MessageBox.Show("You cannot add another connection, because all outputs are already used.", "Connection error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+        }
 
-            LineConnectionPrimary = new Line()
+        private Line createConnectionLine(Block secondBlock, int outputIndex)
+        {
+            Line connectionLine = new Line()
             {
                 Stroke = Brushes.Black
             };
 
-            CanvasBlocks.Children.Add(LineConnectionPrimary);
+            CanvasBlocks.Children.Add(connectionLine);
 
             Binding binding = new Binding
             {
                 Source = this,
-                Path = new PropertyPath("ConnectionOutputX")
+                Path = new PropertyPath("ConnectionOutput" + outputIndex + "X")
             };
-            LineConnectionPrimary.SetBinding(Line.X1Property, binding);
+            connectionLine.SetBinding(Line.X1Property, binding);
 
             binding = new Binding
             {
                 Source = this,
-                Path = new PropertyPath("ConnectionOutputY")
+                Path = new PropertyPath("ConnectionOutput" + outputIndex + "Y")
             };
-            LineConnectionPrimary.SetBinding(Line.Y1Property, binding);
+            connectionLine.SetBinding(Line.Y1Property, binding);
 
             binding = new Binding
             {
-                Source = block,
+                Source = secondBlock,
                 Path = new PropertyPath("ConnectionInputX")
             };
-            LineConnectionPrimary.SetBinding(Line.X2Property, binding);
+            connectionLine.SetBinding(Line.X2Property, binding);
 
             binding = new Binding
             {
-                Source = block,
+                Source = secondBlock,
                 Path = new PropertyPath("ConnectionInputY")
             };
-            LineConnectionPrimary.SetBinding(Line.Y2Property, binding);
+            connectionLine.SetBinding(Line.Y2Property, binding);
 
-            NextBlockPrimary = block;
+            return connectionLine;
         }
 
         private void OnPropertyChanged(string propertyName)

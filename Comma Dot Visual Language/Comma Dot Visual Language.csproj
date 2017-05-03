@@ -67,6 +67,7 @@
     <Compile Include="BlockManager.cs" />
     <Compile Include="CommandBlock.cs" />
     <Compile Include="EndBlock.cs" />
+    <Compile Include="IfBlock.cs" />
     <Compile Include="InputBlock.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

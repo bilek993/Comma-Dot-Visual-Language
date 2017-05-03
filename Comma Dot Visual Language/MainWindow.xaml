@@ -14,6 +14,7 @@
                 <MenuItem Header="Command Block" Click="MenuCommandBlockClick"/>
                 <MenuItem Header="Input Block" Click="MenuAdddInputBlockClick"/>
                 <MenuItem Header="Output Block" Click="MenuAddOutputBlockClick"/>
+                <MenuItem Header="If Block" Click="MenuAddIfBlockClick"/>
                 <MenuItem Header="End Block" Click="MenuAddEndBlockClick"/>
             </MenuItem>
             <MenuItem Header="_Build"/>
