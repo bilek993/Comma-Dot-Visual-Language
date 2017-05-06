@@ -66,5 +66,11 @@ namespace Comma_Dot_Visual_Language
             if (SelectedBlock != null)
                 SelectedBlock.Command = newCommand;
         }
+
+        public void RemoveConnection(int connectionId)
+        {
+            SelectedBlock.RemoveLine(connectionId);
+            Update();
+        }
     }
 }

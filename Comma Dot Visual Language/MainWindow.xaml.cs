@@ -73,6 +73,16 @@ namespace Comma_Dot_Visual_Language
             _propertiesManager.CommandChanged(TextBoxCommand.Text);
         }
 
+        private void ButtonRemoveConnectionPrimaryClick(object sender, RoutedEventArgs e)
+        {
+            _propertiesManager.RemoveConnection(0);
+        }
+
+        private void ButtonRemoveConnectionOptionalClick(object sender, RoutedEventArgs e)
+        {
+            _propertiesManager.RemoveConnection(1);
+        }
+
         private void MenuRunClick(object sender, RoutedEventArgs e)
         {
             _runner.SetStartBlock(_blockManager.StartBlock);
