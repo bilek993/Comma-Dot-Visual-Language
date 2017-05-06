@@ -19,6 +19,8 @@ namespace Comma_Dot_Visual_Language
         public static Block FirstBlockForConnection;
         public static Block SecondBlockForConnection;
 
+        public Block StartBlock { get; private set; }
+
         public BlockManager(Canvas canvasBlocks, PropertiesManager propertiesManager)
         {
             _blocks = new List<Block>();
@@ -31,6 +33,8 @@ namespace Comma_Dot_Visual_Language
             _blocks.Add(new BeginBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Start";
             _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X, _beginStartPositon.Y);
+
+            StartBlock = _blocks[_blocks.Count - 1];
         }
 
         public void CreateCommandBlock()

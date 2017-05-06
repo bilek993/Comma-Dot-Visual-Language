@@ -29,7 +29,9 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Input");
+
+            return NextBlockPrimary;
         }
     }
 }

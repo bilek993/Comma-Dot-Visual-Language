@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -28,7 +29,9 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            throw new NotImplementedException();
+            MessageBox.Show("End");
+
+            return NextBlockPrimary;
         }
     }
 }

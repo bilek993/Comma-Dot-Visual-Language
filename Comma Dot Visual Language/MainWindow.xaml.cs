@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace Comma_Dot_Visual_Language
     {
         private readonly BlockManager _blockManager;
         private readonly PropertiesManager _propertiesManager;
+        private readonly Runner _runner;
 
         public MainWindow()
         {
@@ -31,6 +33,8 @@ namespace Comma_Dot_Visual_Language
 
             _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
             _blockManager.CreateBasicBlocks();
+
+            _runner = new Runner();
         }
 
         private void MenuCommandBlockClick(object sender, RoutedEventArgs e)
@@ -67,6 +71,14 @@ namespace Comma_Dot_Visual_Language
         private void TextBoxCommandTextChanged(object sender, TextChangedEventArgs e)
         {
             _propertiesManager.CommandChanged(TextBoxCommand.Text);
+        }
+
+        private void MenuRunClick(object sender, RoutedEventArgs e)
+        {
+            _runner.SetStartBlock(_blockManager.StartBlock);
+
+            Thread thread = new Thread(_runner.Run);
+            thread.Start();
         }
     }
 }

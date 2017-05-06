@@ -40,7 +40,11 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            throw new NotImplementedException();
+            if (MessageBox.Show("If", "If", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                return NextBlockPrimary;
+
+            else
+                return NextBlockOptional;
         }
     }
 }
