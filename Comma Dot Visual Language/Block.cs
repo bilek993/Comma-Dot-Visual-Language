@@ -282,6 +282,21 @@ namespace Comma_Dot_Visual_Language
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public void RemoveLine(int connectionId)
+        {
+            switch (connectionId)
+            {
+                case 0:
+                    CanvasBlocks.Children.Remove(LineConnectionPrimary);
+                    NextBlockPrimary = null;
+                    break;
+                case 1:
+                    CanvasBlocks.Children.Remove(LineConnectionOptional);
+                    NextBlockOptional = null;
+                    break;
+            }
+        }
+
         public abstract Block Run();
     }
 }
