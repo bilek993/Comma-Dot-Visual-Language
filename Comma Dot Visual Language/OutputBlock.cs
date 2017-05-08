@@ -22,7 +22,7 @@ namespace Comma_Dot_Visual_Language
             };
 
             AddShapeToCanvas();
-            AddTextBlockToCanvas();
+            AddTextBlockToCanvas("Output: ");
             OnMouseLeftButtonDown(null, null);
         }
 
