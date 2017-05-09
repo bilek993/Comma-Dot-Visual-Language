@@ -38,6 +38,8 @@ namespace Comma_Dot_Visual_Language
         private double _connectionOutput2X;
         private double _connectionOutput2Y;
         private PropertiesManager _propertiesManager;
+        private string _prefixCommand = "";
+        private string _suffixCommand = "";
 
         public string Command
         {
@@ -45,9 +47,10 @@ namespace Comma_Dot_Visual_Language
             set
             {
                 _command = value;
-                TextBlockCommand.Text = value;
+                TextBlockCommand.Text = _prefixCommand + value + _suffixCommand;
             }
         }
+
         public double ConnectionInputX
         {
             get { return _connectionInputX; }
@@ -117,14 +120,15 @@ namespace Comma_Dot_Visual_Language
             ChildrenAddEvents();
         }
 
-        protected void AddTextBlockToCanvas()
+        protected void AddTextBlockToCanvas(string prefix = "", string suffix = "")
         {
             TextBlockCommand = new TextBlock()
             {
-                Text = Command,
                 Foreground = new SolidColorBrush(Colors.Black)
             };
 
+            _prefixCommand = prefix;
+            _suffixCommand = suffix;
             CanvasBlocks.Children.Add(TextBlockCommand);
             ChildrenAddEvents();
         }

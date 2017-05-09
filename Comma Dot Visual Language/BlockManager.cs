@@ -46,19 +46,19 @@ namespace Comma_Dot_Visual_Language
         public void CreateInputBlock()
         {
             _blocks.Add(new InputBlock(_canvasBlocks, _propertiesManager));
-            _blocks[_blocks.Count - 1].Command = "Input: A";
+            _blocks[_blocks.Count - 1].Command = "A";
         }
 
         public void CreateOutputBlock()
         {
             _blocks.Add(new OutputBlock(_canvasBlocks, _propertiesManager));
-            _blocks[_blocks.Count - 1].Command = "Output: A";
+            _blocks[_blocks.Count - 1].Command = "A";
         }
 
         public void CreateIfBlock()
         {
             _blocks.Add(new IfBlock(_canvasBlocks, _propertiesManager));
-            _blocks[_blocks.Count - 1].Command = "If (true)";
+            _blocks[_blocks.Count - 1].Command = "true";
         }
 
         public void CreateEndBlock()
