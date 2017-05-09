@@ -28,7 +28,7 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            MessageBox.Show("Output");
+            MessageBox.Show(Runner.Variables[Command].ToString(), "Output");
 
             return NextBlockPrimary;
         }

@@ -29,7 +29,14 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            MessageBox.Show("Input");
+            string variableValue;
+
+            do
+            {
+                variableValue = Microsoft.VisualBasic.Interaction.InputBox("Enter variable value:", "Input");
+            } while (String.IsNullOrWhiteSpace(variableValue));
+
+            Runner.Variables[Command] = variableValue;
 
             return NextBlockPrimary;
         }

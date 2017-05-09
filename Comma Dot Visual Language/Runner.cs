@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Comma_Dot_Visual_Language
 {
     class Runner
     {
+        public static Dictionary<string, object> Variables = new Dictionary<string, object>();
+
         private Block _currentBlock;
 
         public Runner()
@@ -22,9 +25,19 @@ namespace Comma_Dot_Visual_Language
 
         public void Run()
         {
+            Variables.Clear();
+
             while (_currentBlock != null)
             {
-                _currentBlock = _currentBlock.Run();
+                try
+                {
+                    _currentBlock = _currentBlock.Run();
+                }
+                catch (KeyNotFoundException e)
+                {
+                    MessageBox.Show("Invalid variable name.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
             }
         }
     }
