@@ -29,7 +29,8 @@ namespace Comma_Dot_Visual_Language
         {
             InitializeComponent();
 
-            _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, LabelOutputBlockOptional, TextBoxCommand);
+            _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, 
+                LabelOutputBlockOptional, TextBoxCommand, VariableTypeComboBox, DockPanelVariableType);
 
             _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
             _blockManager.CreateBasicBlocks();
@@ -89,6 +90,12 @@ namespace Comma_Dot_Visual_Language
 
             Thread thread = new Thread(_runner.Run);
             thread.Start();
+        }
+
+        private void VariableTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_propertiesManager != null)
+            _propertiesManager.VariableTypeUpdate(VariableTypeComboBox.SelectedIndex);
         }
     }
 }

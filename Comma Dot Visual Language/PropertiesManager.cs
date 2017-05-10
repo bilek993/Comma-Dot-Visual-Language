@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Comma_Dot_Visual_Language
 {
@@ -15,14 +16,18 @@ namespace Comma_Dot_Visual_Language
         private readonly Label _labelOutputPrimary;
         private readonly Label _labelOutputOptional;
         private readonly TextBox _textBoxCommand;
+        private readonly ComboBox _typesComboBox;
+        private readonly DockPanel _variableDockPanel;
         private const string NoneValue = "None";
 
-        public PropertiesManager(Label labelId, Label labelOutputPrimary, Label labelOutputOptional, TextBox textBoxCommand)
+        public PropertiesManager(Label labelId, Label labelOutputPrimary, Label labelOutputOptional, TextBox textBoxCommand, ComboBox typesComboBox, DockPanel variableDockPanel)
         {
             _labelId = labelId;
             _labelOutputPrimary = labelOutputPrimary;
             _labelOutputOptional = labelOutputOptional;
             _textBoxCommand = textBoxCommand;
+            _typesComboBox = typesComboBox;
+            _variableDockPanel = variableDockPanel;
 
             _labelId.Content = "";
             _labelOutputPrimary.Content = "";
@@ -58,6 +63,18 @@ namespace Comma_Dot_Visual_Language
             else
                 _textBoxCommand.IsEnabled = true;
 
+            if (SelectedBlock.GetType() != typeof(InputBlock))
+            {
+                _variableDockPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                _variableDockPanel.Visibility = Visibility.Visible;
+                InputBlock inputBlock = (InputBlock) SelectedBlock;
+                _typesComboBox.SelectedIndex = (int) inputBlock.VarType;
+
+            }
+
             _textBoxCommand.Text = SelectedBlock.Command;
         }
 
@@ -65,6 +82,15 @@ namespace Comma_Dot_Visual_Language
         {
             if (SelectedBlock != null)
                 SelectedBlock.Command = newCommand;
+        }
+
+        public void VariableTypeUpdate(int value)
+        {
+            if (SelectedBlock != null && SelectedBlock.GetType() != typeof(InputBlock))
+                return;
+
+            InputBlock inputBlock = (InputBlock) SelectedBlock;
+            inputBlock.VarType = (VariableType)value;
         }
 
         public void RemoveConnection(int connectionId)

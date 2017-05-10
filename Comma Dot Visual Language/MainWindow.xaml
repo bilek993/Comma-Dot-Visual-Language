@@ -58,6 +58,14 @@
                         <Label Content="Command:" DockPanel.Dock="Left"/>
                         <TextBox Name="TextBoxCommand" Margin="5" TextChanged="TextBoxCommandTextChanged"/>
                     </DockPanel>
+                    <DockPanel Name="DockPanelVariableType">
+                        <Label Content="Variable Type:"/>
+                        <ComboBox Name="VariableTypeComboBox" SelectionChanged="VariableTypeComboBox_OnSelectionChanged">
+                            <ComboBoxItem IsSelected="True">Integer</ComboBoxItem>
+                            <ComboBoxItem>Float</ComboBoxItem>
+                            <ComboBoxItem>String</ComboBoxItem>
+                        </ComboBox>
+                    </DockPanel>
                     <Button Content="Remove block"/>
                 </StackPanel>
             </ScrollViewer>

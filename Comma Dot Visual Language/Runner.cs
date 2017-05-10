@@ -43,6 +43,11 @@ namespace Comma_Dot_Visual_Language
                     MessageBox.Show("Invalid argument in command.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
+                catch(FormatException e)
+                {
+                    MessageBox.Show("Invalid variable type.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
             }
         }
     }
