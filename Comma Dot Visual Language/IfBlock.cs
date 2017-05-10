@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,11 +41,16 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            if (MessageBox.Show("If", "If", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                return NextBlockPrimary;
+            Regex regex = new Regex(@"(([a-zA-Z][a-zA-Z0-9]*)|([0-9]+))((==)|(>=)|(<=)|(>)|(<)|(!=))(([a-zA-Z][a-zA-Z0-9]*)|([0-9]+))");
+            Match match;
+            string commandOptimized = Regex.Replace(Command, @"\s+", "");
 
-            else
-                return NextBlockOptional;
+            if (!regex.IsMatch(commandOptimized))
+                throw new ArgumentException();
+
+            match = regex.Match(commandOptimized);
+
+            return null;
         }
     }
 }

@@ -38,6 +38,11 @@ namespace Comma_Dot_Visual_Language
                     MessageBox.Show("Invalid variable name.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
+                catch (ArgumentException e)
+                {
+                    MessageBox.Show("Invalid argument in command.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
             }
         }
     }

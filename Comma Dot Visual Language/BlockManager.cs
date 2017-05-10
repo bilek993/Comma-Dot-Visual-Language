@@ -58,7 +58,7 @@ namespace Comma_Dot_Visual_Language
         public void CreateIfBlock()
         {
             _blocks.Add(new IfBlock(_canvasBlocks, _propertiesManager));
-            _blocks[_blocks.Count - 1].Command = "true";
+            _blocks[_blocks.Count - 1].Command = "2==2";
         }
 
         public void CreateEndBlock()
