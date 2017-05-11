@@ -23,12 +23,8 @@ namespace Comma_Dot_Visual_Language
         public Block NextBlockOptional { get; private set; }
         public int MaxConnectionsCount { get; private set; }
 
-        protected Canvas CanvasBlocks;
+        protected readonly Canvas CanvasBlocks;
         protected Shape Shape;
-        protected TextBlock TextBlockCommand;
-        protected Line LineConnectionPrimary;
-        protected Line LineConnectionOptional;
-        protected bool IsPressed;
 
         private string _command = "";
         private double _connectionInputX;
@@ -40,6 +36,10 @@ namespace Comma_Dot_Visual_Language
         private PropertiesManager _propertiesManager;
         private string _prefixCommand = "";
         private string _suffixCommand = "";
+        private TextBlock _textBlockCommand;
+        private Line _lineConnectionPrimary;
+        private Line _lineConnectionOptional;
+        private bool _isPressed;
 
         public string Command
         {
@@ -47,7 +47,7 @@ namespace Comma_Dot_Visual_Language
             set
             {
                 _command = value;
-                TextBlockCommand.Text = _prefixCommand + value + _suffixCommand;
+                _textBlockCommand.Text = _prefixCommand + value + _suffixCommand;
             }
         }
 
@@ -122,14 +122,14 @@ namespace Comma_Dot_Visual_Language
 
         protected void AddTextBlockToCanvas(string prefix = "", string suffix = "")
         {
-            TextBlockCommand = new TextBlock()
+            _textBlockCommand = new TextBlock()
             {
                 Foreground = new SolidColorBrush(Colors.Black)
             };
 
             _prefixCommand = prefix;
             _suffixCommand = suffix;
-            CanvasBlocks.Children.Add(TextBlockCommand);
+            CanvasBlocks.Children.Add(_textBlockCommand);
             ChildrenAddEvents();
         }
 
@@ -140,9 +140,9 @@ namespace Comma_Dot_Visual_Language
             CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
         }
 
-        protected void OnMouseMove(object sender, MouseEventArgs mouseEventArgs)
+        private void OnMouseMove(object sender, MouseEventArgs mouseEventArgs)
         {
-            if (!IsPressed)
+            if (!_isPressed)
                 return;
 
             var mousePosition = mouseEventArgs.GetPosition(CanvasBlocks);
@@ -156,15 +156,15 @@ namespace Comma_Dot_Visual_Language
 
             if (Shape.ActualWidth != 0 && Shape.ActualHeight != 0)
             {
-                Canvas.SetLeft(TextBlockCommand, left + Shape.ActualWidth / 2 - TextBlockCommand.ActualWidth / 2);
-                Canvas.SetTop(TextBlockCommand, top + Shape.ActualHeight / 2 - TextBlockCommand.ActualHeight / 2);
+                Canvas.SetLeft(_textBlockCommand, left + Shape.ActualWidth / 2 - _textBlockCommand.ActualWidth / 2);
+                Canvas.SetTop(_textBlockCommand, top + Shape.ActualHeight / 2 - _textBlockCommand.ActualHeight / 2);
             }
             else
             {
                 Shape.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                TextBlockCommand.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                Canvas.SetLeft(TextBlockCommand, left + Shape.DesiredSize.Width / 2 - TextBlockCommand.DesiredSize.Width / 2);
-                Canvas.SetTop(TextBlockCommand, top + Shape.DesiredSize.Height / 2 - TextBlockCommand.DesiredSize.Height / 2);
+                _textBlockCommand.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Canvas.SetLeft(_textBlockCommand, left + Shape.DesiredSize.Width / 2 - _textBlockCommand.DesiredSize.Width / 2);
+                Canvas.SetTop(_textBlockCommand, top + Shape.DesiredSize.Height / 2 - _textBlockCommand.DesiredSize.Height / 2);
             }
 
             SetConnectionsPositions(left, top);
@@ -180,10 +180,10 @@ namespace Comma_Dot_Visual_Language
             ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + Shape.ActualHeight;
         }
 
-        protected void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
             Shape.ReleaseMouseCapture();
-            IsPressed = false;
+            _isPressed = false;
         }
 
         protected void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
@@ -204,7 +204,7 @@ namespace Comma_Dot_Visual_Language
             _propertiesManager.Update();
 
             Shape.CaptureMouse();
-            IsPressed = true;
+            _isPressed = true;
         }
 
         public void AddConnection(Block block)
@@ -225,13 +225,13 @@ namespace Comma_Dot_Visual_Language
             {
                 NextBlockPrimary = block;
 
-                LineConnectionPrimary = createConnectionLine(block, 1);
+                _lineConnectionPrimary = CreateConnectionLine(block, 1);
             }
             else if (MaxConnectionsCount == 2 && NextBlockOptional == null)
             {
                 NextBlockOptional = block;
 
-                LineConnectionOptional = createConnectionLine(block, 2);
+                _lineConnectionOptional = CreateConnectionLine(block, 2);
             }
             else
             {
@@ -240,7 +240,7 @@ namespace Comma_Dot_Visual_Language
             }
         }
 
-        private Line createConnectionLine(Block secondBlock, int outputIndex)
+        private Line CreateConnectionLine(Block secondBlock, int outputIndex)
         {
             Line connectionLine = new Line()
             {
@@ -282,8 +282,7 @@ namespace Comma_Dot_Visual_Language
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void RemoveLine(int connectionId)
@@ -291,11 +290,11 @@ namespace Comma_Dot_Visual_Language
             switch (connectionId)
             {
                 case 0:
-                    CanvasBlocks.Children.Remove(LineConnectionPrimary);
+                    CanvasBlocks.Children.Remove(_lineConnectionPrimary);
                     NextBlockPrimary = null;
                     break;
                 case 1:
-                    CanvasBlocks.Children.Remove(LineConnectionOptional);
+                    CanvasBlocks.Children.Remove(_lineConnectionOptional);
                     NextBlockOptional = null;
                     break;
             }

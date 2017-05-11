@@ -13,7 +13,7 @@ namespace Comma_Dot_Visual_Language
         private static Vector _beginStartPositon = new Vector(350, 100);
         private readonly List<Block> _blocks;
         private readonly Canvas _canvasBlocks;
-        private PropertiesManager _propertiesManager;
+        private readonly PropertiesManager _propertiesManager;
 
         public static bool IsAddConectionMode = false;
         public static Block FirstBlockForConnection;
