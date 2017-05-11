@@ -41,7 +41,7 @@ namespace Comma_Dot_Visual_Language
 
         public override Block Run()
         {
-            Regex regex = new Regex(@"(([a-zA-Z][a-zA-Z0-9]*)|([0-9]+))((==)|(>=)|(<=)|(>)|(<)|(!=))(([a-zA-Z][a-zA-Z0-9]*)|([0-9]+))");
+            Regex regex = new Regex(@"^((([a-zA-Z][a-zA-Z0-9]*)|([0-9,]+))((==)|(>=)|(<=)|(>)|(<)|(!=))(([a-zA-Z][a-zA-Z0-9]*)|([0-9,]+)))$");
             Match match;
             string commandOptimized = Regex.Replace(Command, @"\s+", "");
 
@@ -50,7 +50,136 @@ namespace Comma_Dot_Visual_Language
 
             match = regex.Match(commandOptimized);
 
+            object variable1;
+            object variable2;
+
+            if (match.Groups[3].Success)
+            {
+                variable1 = Runner.Variables[match.Groups[3].Value];
+            }
+            else
+            {
+                variable1 = ParseVariableValue(match.Groups[4].Value);
+            }
+
+            if (match.Groups[13].Success)
+            {
+                variable2 = Runner.Variables[match.Groups[13].Value];
+            }
+            else
+            {
+                variable2 = ParseVariableValue(match.Groups[14].Value);
+            }
+
+            return CalculateResult(match, variable1, variable2) ? NextBlockPrimary : NextBlockOptional;
+        }
+
+        private object ParseVariableValue(string value)
+        {
+            int intResult;
+            if (int.TryParse(value, out intResult))
+            {
+                return intResult;
+            }
+
+            float floatResult;
+            if (float.TryParse(value, out floatResult))
+            {
+                return floatResult;
+            }
+
             return null;
+        }
+        
+        private bool CalculateResult(Match match, object variable1, object variable2)
+        {
+            bool result = true;
+            if (match.Groups[6].Success)
+            {
+                if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(int))
+                    result = (int)variable1 == (int)variable2;
+
+                else if(variable1.GetType() == typeof(int) && variable2.GetType() == typeof(float))
+                    result = (int)variable1 == (float)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(int))
+                    result = (float)variable1 == (int)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(float))
+                    result = (float)variable1 == (float)variable2;
+            }
+            else if (match.Groups[7].Success)
+            {
+                if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(int))
+                    result = (int)variable1 >= (int)variable2;
+
+                else if(variable1.GetType() == typeof(int) && variable2.GetType() == typeof(float))
+                    result = (int)variable1 >= (float)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(int))
+                    result = (float)variable1 >= (int)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(float))
+                    result = (float)variable1 >= (float)variable2;
+            }
+            else if (match.Groups[8].Success)
+            {
+                if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(int))
+                    result = (int)variable1 <= (int)variable2;
+
+                else if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(float))
+                    result = (int)variable1 <= (float)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(int))
+                    result = (float)variable1 <= (int)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(float))
+                    result = (float)variable1 <= (float)variable2;
+            }
+            else if (match.Groups[9].Success)
+            {
+                if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(int))
+                    result = (int)variable1 > (int)variable2;
+
+                else if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(float))
+                    result = (int)variable1 > (float)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(int))
+                    result = (float)variable1 > (int)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(float))
+                    result = (float)variable1 > (float)variable2;
+            }
+            else if (match.Groups[10].Success)
+            {
+                if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(int))
+                    result = (int)variable1 < (int)variable2;
+
+                else if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(float))
+                    result = (int)variable1 < (float)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(int))
+                    result = (float)variable1 < (int)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(float))
+                    result = (float)variable1 < (float)variable2;
+            }
+            else if (match.Groups[11].Success)
+            {
+                if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(int))
+                    result = (int)variable1 != (int)variable2;
+
+                else if (variable1.GetType() == typeof(int) && variable2.GetType() == typeof(float))
+                    result = (int)variable1 != (float)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(int))
+                    result = (float)variable1 != (int)variable2;
+
+                else if (variable1.GetType() == typeof(float) && variable2.GetType() == typeof(float))
+                    result = (float)variable1 != (float)variable2;
+            }
+
+            return result;
         }
     }
 }
