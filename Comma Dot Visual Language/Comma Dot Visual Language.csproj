@@ -51,34 +51,34 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Runner.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Helpers\Runner.cs" />
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BeginBlock.cs" />
-    <Compile Include="Block.cs" />
-    <Compile Include="BlockManager.cs" />
-    <Compile Include="CommandBlock.cs" />
-    <Compile Include="EndBlock.cs" />
-    <Compile Include="IfBlock.cs" />
-    <Compile Include="InputBlock.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Blocks\BeginBlock.cs" />
+    <Compile Include="Blocks\Block.cs" />
+    <Compile Include="Helpers\BlockManager.cs" />
+    <Compile Include="Blocks\CommandBlock.cs" />
+    <Compile Include="Blocks\EndBlock.cs" />
+    <Compile Include="Blocks\IfBlock.cs" />
+    <Compile Include="Blocks\InputBlock.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OutputBlock.cs" />
-    <Compile Include="PropertiesManager.cs" />
+    <Compile Include="Blocks\OutputBlock.cs" />
+    <Compile Include="Helpers\PropertiesManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
