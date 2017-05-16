@@ -46,6 +46,11 @@ namespace Comma_Dot_Visual_Language.Helpers
                     MessageBox.Show("Invalid variable type.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
+                catch (InvalidOperationException e)
+                {
+                    MessageBox.Show("Invalid command.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
             }
         }
     }
