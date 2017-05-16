@@ -15,10 +15,12 @@ namespace Comma_Dot_Visual_Language.Helpers
         private readonly ComboBox _typesComboBox;
         private readonly DockPanel _variableDockPanel;
         private readonly DockPanel _optionalOutputDockPanel;
+        private readonly DockPanel _primiaryOutputDockPanel;
         private const string NoneValue = "None";
 
         public PropertiesManager(Label labelId, Label labelOutputPrimary, Label labelOutputOptional,
-            TextBox textBoxCommand, ComboBox typesComboBox, DockPanel variableDockPanel, DockPanel optionalOutputDockPanel)
+            TextBox textBoxCommand, ComboBox typesComboBox, DockPanel variableDockPanel, DockPanel optionalOutputDockPanel,
+            DockPanel primiaryOutputDockPanel)
         {
             _labelId = labelId;
             _labelOutputPrimary = labelOutputPrimary;
@@ -27,6 +29,7 @@ namespace Comma_Dot_Visual_Language.Helpers
             _typesComboBox = typesComboBox;
             _variableDockPanel = variableDockPanel;
             _optionalOutputDockPanel = optionalOutputDockPanel;
+            _primiaryOutputDockPanel = primiaryOutputDockPanel;
 
             _labelId.Content = "";
             _labelOutputPrimary.Content = "";
@@ -75,7 +78,8 @@ namespace Comma_Dot_Visual_Language.Helpers
             }
 
             _optionalOutputDockPanel.Visibility = SelectedBlock.GetType() == typeof(IfBlock) ? Visibility.Visible : Visibility.Collapsed;
-            
+            _primiaryOutputDockPanel.Visibility = SelectedBlock.GetType() == typeof(EndBlock) ? Visibility.Collapsed : Visibility.Visible;
+
             _textBoxCommand.Text = SelectedBlock.Command;
         }
 

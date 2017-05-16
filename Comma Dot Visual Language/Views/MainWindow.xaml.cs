@@ -20,7 +20,8 @@ namespace Comma_Dot_Visual_Language.Views
             InitializeComponent();
 
             _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, 
-                LabelOutputBlockOptional, TextBoxCommand, VariableTypeComboBox, DockPanelVariableType, PanelOptionalOutput);
+                LabelOutputBlockOptional, TextBoxCommand, VariableTypeComboBox, DockPanelVariableType, 
+                PanelOptionalOutput, PanelPrimaryOutput);
 
             _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
             _propertiesManager.SelectedBlock = _blockManager.CreateBasicBlocks();

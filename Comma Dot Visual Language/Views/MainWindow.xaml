@@ -44,7 +44,7 @@
                         <Label Content="Id:"/>
                         <Label Name="LabelId" Content="???"/>
                     </DockPanel>
-                    <DockPanel>
+                    <DockPanel Name="PanelPrimaryOutput">
                         <Button Content="Remove" DockPanel.Dock="Right" Margin="2" Click="ButtonRemoveConnectionPrimaryClick"/>
                         <Label Content="Output primary:"/>
                         <Label Name="LabelOutputBlockPrimary" Content="???"/>
