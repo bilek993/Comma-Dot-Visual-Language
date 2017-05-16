@@ -25,13 +25,15 @@ namespace Comma_Dot_Visual_Language.Helpers
             _propertiesManager = propertiesManager;
         }
 
-        public void CreateBasicBlocks()
+        public Block CreateBasicBlocks()
         {
             _blocks.Add(new BeginBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Start";
             _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X, _beginStartPositon.Y);
 
             StartBlock = _blocks[_blocks.Count - 1];
+
+            return _blocks[_blocks.Count - 1];
         }
 
         public void CreateCommandBlock()

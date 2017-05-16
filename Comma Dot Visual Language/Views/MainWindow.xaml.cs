@@ -20,10 +20,11 @@ namespace Comma_Dot_Visual_Language.Views
             InitializeComponent();
 
             _propertiesManager = new PropertiesManager(LabelId, LabelOutputBlockPrimary, 
-                LabelOutputBlockOptional, TextBoxCommand, VariableTypeComboBox, DockPanelVariableType);
+                LabelOutputBlockOptional, TextBoxCommand, VariableTypeComboBox, DockPanelVariableType, PanelOptionalOutput);
 
             _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
-            _blockManager.CreateBasicBlocks();
+            _propertiesManager.SelectedBlock = _blockManager.CreateBasicBlocks();
+            _propertiesManager.Update();
 
             _runner = new Runner();
         }

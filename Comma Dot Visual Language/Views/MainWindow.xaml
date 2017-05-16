@@ -49,7 +49,7 @@
                         <Label Content="Output primary:"/>
                         <Label Name="LabelOutputBlockPrimary" Content="???"/>
                     </DockPanel>
-                    <DockPanel>
+                    <DockPanel Name="PanelOptionalOutput">
                         <Button Content="Remove" DockPanel.Dock="Right" Margin="2" Click="ButtonRemoveConnectionOptionalClick"/>
                         <Label Content="Output optional:"/>
                         <Label Name="LabelOutputBlockOptional" Content="???"/>
