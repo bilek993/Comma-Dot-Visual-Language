@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Microsoft.VisualBasic.CompilerServices;
+using Comma_Dot_Visual_Language.Helpers;
 
-namespace Comma_Dot_Visual_Language
+namespace Comma_Dot_Visual_Language.Blocks
 {
     enum VariableType
     {

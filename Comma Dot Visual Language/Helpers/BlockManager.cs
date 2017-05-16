@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using Comma_Dot_Visual_Language.Blocks;
 
-namespace Comma_Dot_Visual_Language
+namespace Comma_Dot_Visual_Language.Helpers
 {
     public class BlockManager
     {
