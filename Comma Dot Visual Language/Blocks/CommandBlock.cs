@@ -27,7 +27,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         public override Block Run()
         {
-            Regex regex = new Regex(@"^(([A-Za-z]+)[(](([A-Za-z]+,)*[A-Za-z]+)[)])$");
+            Regex regex = new Regex(@"^((([A-Za-z][a-zA-Z0-9]*)=)?([A-Za-z][a-zA-Z0-9]*)[(](([A-Za-z][a-zA-Z0-9]*,)*[A-Za-z][a-zA-Z0-9]*)?[)])$");
             Match match;
             string commandOptimized = Regex.Replace(Command, @"\s+", "");
 
@@ -36,8 +36,9 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             match = regex.Match(commandOptimized);
 
-            string matchedCommand = match.Groups[2].Value;
-            string matchedArguments = match.Groups[3].Success ? match.Groups[3].Value : "";
+            string matchedReturnedValue = match.Groups[3].Success ? match.Groups[3].Value : "";
+            string matchedCommand = match.Groups[4].Value;
+            string matchedArguments = match.Groups[5].Success ? match.Groups[5].Value : "";
             string[] arguments = CommandExecution.ArgumentsSpliter(matchedArguments);
 
             switch (matchedCommand)
