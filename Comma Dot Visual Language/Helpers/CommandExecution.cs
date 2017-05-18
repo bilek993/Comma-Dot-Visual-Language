@@ -15,15 +15,15 @@ namespace Comma_Dot_Visual_Language.Helpers
 
         public static void IncrementValues(string[] arguments)
         {
-            for (int i = 0; i < arguments.Length; ++i)
+            foreach (string t in arguments)
             {
-                if (Runner.Variables[arguments[i]].GetType() == typeof(int))
+                if (Runner.Variables[t].GetType() == typeof(int))
                 {
-                    Runner.Variables[arguments[i]] = (int)Runner.Variables[arguments[i]] + 1;
+                    Runner.Variables[t] = (int)Runner.Variables[t] + 1;
                 }
-                else if (Runner.Variables[arguments[i]].GetType() == typeof(float))
+                else if (Runner.Variables[t].GetType() == typeof(float))
                 {
-                    Runner.Variables[arguments[i]] = (float)Runner.Variables[arguments[i]] + 1;
+                    Runner.Variables[t] = (float)Runner.Variables[t] + 1;
                 }
                 else
                 {
@@ -34,15 +34,15 @@ namespace Comma_Dot_Visual_Language.Helpers
 
         public static void DecrementValues(string[] arguments)
         {
-            for (int i = 0; i < arguments.Length; ++i)
+            foreach (string t in arguments)
             {
-                if (Runner.Variables[arguments[i]].GetType() == typeof(int))
+                if (Runner.Variables[t].GetType() == typeof(int))
                 {
-                    Runner.Variables[arguments[i]] = (int)Runner.Variables[arguments[i]] - 1;
+                    Runner.Variables[t] = (int)Runner.Variables[t] - 1;
                 }
-                else if (Runner.Variables[arguments[i]].GetType() == typeof(float))
+                else if (Runner.Variables[t].GetType() == typeof(float))
                 {
-                    Runner.Variables[arguments[i]] = (float)Runner.Variables[arguments[i]] - 1;
+                    Runner.Variables[t] = (float)Runner.Variables[t] - 1;
                 }
                 else
                 {
