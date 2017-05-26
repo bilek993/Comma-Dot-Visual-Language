@@ -31,22 +31,22 @@ namespace Comma_Dot_Visual_Language.Helpers
                 {
                     _currentBlock = _currentBlock.Run();
                 }
-                catch (KeyNotFoundException e)
+                catch (KeyNotFoundException)
                 {
                     MessageBox.Show("Invalid variable name.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
-                catch (ArgumentException e)
+                catch (ArgumentException)
                 {
                     MessageBox.Show("Invalid argument in command.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
-                catch(FormatException e)
+                catch(FormatException)
                 {
                     MessageBox.Show("Invalid variable type.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
-                catch (InvalidOperationException e)
+                catch (InvalidOperationException)
                 {
                     MessageBox.Show("Invalid command.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;

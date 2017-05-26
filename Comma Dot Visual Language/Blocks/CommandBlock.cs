@@ -27,7 +27,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         private void ExceptionHasArguments(string[] arguments)
         {
-            if (arguments.Length > 0)
+            if (!(arguments.Length == 1 && arguments[0] == ""))
                 throw new ArgumentException();
         }
 
