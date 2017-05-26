@@ -25,8 +25,6 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         public override Block Run()
         {
-            MessageBox.Show("End");
-
             return NextBlockPrimary;
         }
     }
