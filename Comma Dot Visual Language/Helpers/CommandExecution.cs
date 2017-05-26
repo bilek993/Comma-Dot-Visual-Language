@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,22 @@ namespace Comma_Dot_Visual_Language.Helpers
                 {
                     throw new ArgumentException();
                 }
+            }
+        }
+
+        public static void Math_Pi(string returnedArgument)
+        {
+            if (Runner.Variables[returnedArgument].GetType() == typeof(int))
+            {
+                Runner.Variables[returnedArgument] = (int)Math.PI;
+            }
+            else if (Runner.Variables[returnedArgument].GetType() == typeof(float))
+            {
+                Runner.Variables[returnedArgument] = Math.PI;
+            }
+            else
+            {
+                Runner.Variables[returnedArgument] = Math.PI.ToString(CultureInfo.InvariantCulture);
             }
         }
     }

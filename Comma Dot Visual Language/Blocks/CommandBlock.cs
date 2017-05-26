@@ -36,7 +36,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             match = regex.Match(commandOptimized);
 
-            string matchedReturnedValue = match.Groups[3].Success ? match.Groups[3].Value : "";
+            string matchedReturnArgument = match.Groups[3].Success ? match.Groups[3].Value : "";
             string matchedCommand = match.Groups[4].Value;
             string matchedArguments = match.Groups[5].Success ? match.Groups[5].Value : "";
             string[] arguments = CommandExecution.ArgumentsSpliter(matchedArguments);
@@ -49,6 +49,10 @@ namespace Comma_Dot_Visual_Language.Blocks
 
                 case "Dec":
                     CommandExecution.DecrementValues(arguments);
+                    break;
+
+                case "Pi":
+                    CommandExecution.Math_Pi(matchedReturnArgument);
                     break;
 
                 default:
