@@ -67,5 +67,21 @@ namespace Comma_Dot_Visual_Language.Helpers
                 Runner.Variables[returnedVariable] = Math.PI.ToString(CultureInfo.InvariantCulture);
             }
         }
+
+        public static void Math_e(string returnedVariable)
+        {
+            if (Runner.Variables[returnedVariable].GetType() == typeof(int))
+            {
+                Runner.Variables[returnedVariable] = (int)Math.E;
+            }
+            else if (Runner.Variables[returnedVariable].GetType() == typeof(float))
+            {
+                Runner.Variables[returnedVariable] = Math.E;
+            }
+            else
+            {
+                Runner.Variables[returnedVariable] = Math.E.ToString(CultureInfo.InvariantCulture);
+            }
+        }
     }
 }

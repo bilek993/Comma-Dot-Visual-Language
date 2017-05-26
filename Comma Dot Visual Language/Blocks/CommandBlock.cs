@@ -70,6 +70,11 @@ namespace Comma_Dot_Visual_Language.Blocks
                     CommandExecution.Math_Pi(matchedReturnedVariable);
                     break;
 
+                case "E":
+                    ExceptionHasArguments(arguments);
+                    CommandExecution.Math_e(matchedReturnedVariable);
+                    break;
+
                 default:
                     throw new InvalidOperationException();
             }
