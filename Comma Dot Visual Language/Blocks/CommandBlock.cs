@@ -25,6 +25,18 @@ namespace Comma_Dot_Visual_Language.Blocks
             OnMouseLeftButtonDown(null, null);
         }
 
+        private void ExceptionHasArguments(string[] arguments)
+        {
+            if (arguments.Length > 0)
+                throw new ArgumentException();
+        }
+
+        private void ExceptionHasReturnedVariable(string returnedArguments)
+        {
+            if (returnedArguments != "")
+                throw new ArgumentException();
+        }
+
         public override Block Run()
         {
             Regex regex = new Regex(@"^((([A-Za-z][a-zA-Z0-9]*)=)?([A-Za-z][a-zA-Z0-9]*)[(](([A-Za-z][a-zA-Z0-9]*,)*[A-Za-z][a-zA-Z0-9]*)?[)])$");
@@ -36,7 +48,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             match = regex.Match(commandOptimized);
 
-            string matchedReturnArgument = match.Groups[3].Success ? match.Groups[3].Value : "";
+            string matchedReturnedVariable = match.Groups[3].Success ? match.Groups[3].Value : "";
             string matchedCommand = match.Groups[4].Value;
             string matchedArguments = match.Groups[5].Success ? match.Groups[5].Value : "";
             string[] arguments = CommandExecution.ArgumentsSpliter(matchedArguments);
@@ -44,15 +56,18 @@ namespace Comma_Dot_Visual_Language.Blocks
             switch (matchedCommand)
             {
                 case "Inc":
+                    ExceptionHasReturnedVariable(matchedReturnedVariable);
                     CommandExecution.IncrementValues(arguments);
                     break;
 
                 case "Dec":
+                    ExceptionHasReturnedVariable(matchedReturnedVariable);
                     CommandExecution.DecrementValues(arguments);
                     break;
 
                 case "Pi":
-                    CommandExecution.Math_Pi(matchedReturnArgument);
+                    ExceptionHasArguments(arguments);
+                    CommandExecution.Math_Pi(matchedReturnedVariable);
                     break;
 
                 default:

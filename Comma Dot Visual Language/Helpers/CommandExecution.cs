@@ -52,19 +52,19 @@ namespace Comma_Dot_Visual_Language.Helpers
             }
         }
 
-        public static void Math_Pi(string returnedArgument)
+        public static void Math_Pi(string returnedVariable)
         {
-            if (Runner.Variables[returnedArgument].GetType() == typeof(int))
+            if (Runner.Variables[returnedVariable].GetType() == typeof(int))
             {
-                Runner.Variables[returnedArgument] = (int)Math.PI;
+                Runner.Variables[returnedVariable] = (int)Math.PI;
             }
-            else if (Runner.Variables[returnedArgument].GetType() == typeof(float))
+            else if (Runner.Variables[returnedVariable].GetType() == typeof(float))
             {
-                Runner.Variables[returnedArgument] = Math.PI;
+                Runner.Variables[returnedVariable] = Math.PI;
             }
             else
             {
-                Runner.Variables[returnedArgument] = Math.PI.ToString(CultureInfo.InvariantCulture);
+                Runner.Variables[returnedVariable] = Math.PI.ToString(CultureInfo.InvariantCulture);
             }
         }
     }
