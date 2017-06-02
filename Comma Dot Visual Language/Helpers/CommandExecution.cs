@@ -83,5 +83,16 @@ namespace Comma_Dot_Visual_Language.Helpers
                 Runner.Variables[returnedVariable] = Math.E.ToString(CultureInfo.InvariantCulture);
             }
         }
+
+        public static void Modulo(string returnedVariable, string[] arguments)
+        {
+            if (arguments.Length != 2 || Runner.Variables[returnedVariable].GetType() != typeof(int))
+                throw new ArgumentException();
+
+            if (Runner.Variables[arguments[0]].GetType() != typeof(int) || Runner.Variables[arguments[1]].GetType() != typeof(int))
+                throw new ArgumentException();
+
+            Runner.Variables[returnedVariable] = (int)Runner.Variables[arguments[0]] % (int)Runner.Variables[arguments[1]];
+        }
     }
 }

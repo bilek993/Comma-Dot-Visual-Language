@@ -45,6 +45,18 @@
                     <LineBreak/>
                     <Run Text="(INT|FLOAT|STRING) eValue" Foreground="#FFC8C8C8"/>
 
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Modulo operation:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <LineBreak/>
+                    <Run Text="result = Mod(dividend, divisor)"/>
+                    <LineBreak/>
+                    <Run Text="(INT) result" Foreground="#FFC8C8C8"/>
+                    <LineBreak/>
+                    <Run Text="(INT) dividend" Foreground="#FFC8C8C8"/>
+                    <LineBreak/>
+                    <Run Text="(INT) divisor" Foreground="#FFC8C8C8"/>
+
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
