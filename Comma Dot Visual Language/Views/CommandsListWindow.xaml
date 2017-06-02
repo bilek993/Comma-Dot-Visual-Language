@@ -1,0 +1,53 @@
+﻿<Window x:Class="Comma_Dot_Visual_Language.Views.CommandsListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Comma_Dot_Visual_Language"
+        mc:Ignorable="d"
+        Title="CommandsListWindow" Height="480" Width="640">
+    <Grid>
+        <RichTextBox IsReadOnly="True" BorderThickness="0" Margin="5">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="List of commands:" FontSize="24" FontWeight="Bold" FontStyle="Italic" TextDecorations="{x:Null}"/>
+                    <LineBreak/>
+
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Increment values:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <LineBreak/>
+                    <Run Text="Inc(valueToIncrement,..)"/>
+                    <LineBreak/>
+                    <Run Text="(INT|FLOAT) valueToIncrement" Foreground="#FFC8C8C8"/>
+                    
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Decrement values:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <LineBreak/>
+                    <Run Text="Dec(valueToDecrement,..)"/>
+                    <LineBreak/>
+                    <Run Text="(INT|FLOAT) valueToDecrement" Foreground="#FFC8C8C8"/>
+
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="π value:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <LineBreak/>
+                    <Run Text="piValue = Pi()"/>
+                    <LineBreak/>
+                    <Run Text="(INT|FLOAT|STRING) piValue" Foreground="#FFC8C8C8"/>
+                    
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Euler's number:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <LineBreak/>
+                    <Run Text="eValue = E()"/>
+                    <LineBreak/>
+                    <Run Text="(INT|FLOAT|STRING) eValue" Foreground="#FFC8C8C8"/>
+
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+    </Grid>
+</Window>

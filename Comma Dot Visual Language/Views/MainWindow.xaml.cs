@@ -89,5 +89,10 @@ namespace Comma_Dot_Visual_Language.Views
             if (_propertiesManager != null)
             _propertiesManager.VariableTypeUpdate(VariableTypeComboBox.SelectedIndex);
         }
+
+        private void MenuShowCommandsListClick(object sender, RoutedEventArgs e)
+        {
+            new CommandsListWindow().Show();
+        }
     }
 }
