@@ -94,5 +94,10 @@ namespace Comma_Dot_Visual_Language.Views
         {
             new CommandsListWindow().Show();
         }
+
+        private void MenuCloseAppClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

@@ -9,7 +9,12 @@
         MinHeight="360" MinWidth="640">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File"/>
+            <MenuItem Header="_File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Exit" Click="MenuCloseAppClick"/>
+            </MenuItem>
             <MenuItem Header="_Add">
                 <MenuItem Header="Command Block" Click="MenuCommandBlockClick"/>
                 <MenuItem Header="Input Block" Click="MenuAdddInputBlockClick"/>
