@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OnpParser\ExpressionNode.cs" />
+    <Compile Include="OnpParser\Operator.cs" />
+    <Compile Include="OnpParser\Parser.cs" />
+    <Compile Include="OnpParser\Variable.cs" />
     <Compile Include="Views\CommandsListWindow.xaml.cs">
       <DependentUpon>CommandsListWindow.xaml</DependentUpon>
     </Compile>
