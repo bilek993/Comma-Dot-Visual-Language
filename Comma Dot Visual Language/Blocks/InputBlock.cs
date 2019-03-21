@@ -41,7 +41,7 @@ namespace Comma_Dot_Visual_Language.Blocks
             do
             {
                 variableValue = Microsoft.VisualBasic.Interaction.InputBox("Enter variable value:", "Input");
-            } while (String.IsNullOrWhiteSpace(variableValue));
+            } while (string.IsNullOrWhiteSpace(variableValue));
 
             switch (VarType)
             {
@@ -56,7 +56,8 @@ namespace Comma_Dot_Visual_Language.Blocks
                 case VariableType.String:
                     Runner.Variables[Command] = variableValue;
                     break;
-
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             return NextBlockPrimary;

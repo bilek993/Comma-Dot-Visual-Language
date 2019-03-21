@@ -26,13 +26,13 @@ namespace Comma_Dot_Visual_Language.Blocks
             OnMouseLeftButtonDown(null, null);
         }
 
-        private void ExceptionHasArguments(string[] arguments)
+        private static void ExceptionHasArguments(string[] arguments)
         {
             if (!(arguments.Length == 1 && arguments[0] == ""))
                 throw new ArgumentException();
         }
 
-        private void ExceptionHasReturnedVariable(string returnedArguments)
+        private static void ExceptionHasReturnedVariable(string returnedArguments)
         {
             if (returnedArguments != "")
                 throw new ArgumentException();
@@ -40,20 +40,20 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         public override Block Run()
         {
-            Regex regexFunction = new Regex(@"^((([A-Za-z][a-zA-Z0-9]*)=)?([A-Za-z][a-zA-Z0-9]*)[(](([A-Za-z][a-zA-Z0-9]*,)*[A-Za-z][a-zA-Z0-9]*)?[)])$");
-            Regex regexOperation = new Regex(@"^(([A-Za-z][a-zA-Z0-9]*)=)([A-Za-z0-9\(\)\+\-\*\/\,\^\(\)]+)$");
+            var regexFunction = new Regex(@"^((([A-Za-z][a-zA-Z0-9]*)=)?([A-Za-z][a-zA-Z0-9]*)[(](([A-Za-z][a-zA-Z0-9]*,)*[A-Za-z][a-zA-Z0-9]*)?[)])$");
+            var regexOperation = new Regex(@"^(([A-Za-z][a-zA-Z0-9]*)=)([A-Za-z0-9\(\)\+\-\*\/\,\^\(\)]+)$");
             Match match;
 
-            string commandOptimized = Regex.Replace(Command, @"\s+", "");
+            var commandOptimized = Regex.Replace(Command, @"\s+", "");
 
             if (regexFunction.IsMatch(commandOptimized))
             {
                 match = regexFunction.Match(commandOptimized);
 
-                string matchedReturnedVariable = match.Groups[3].Success ? match.Groups[3].Value : "";
-                string matchedCommand = match.Groups[4].Value;
-                string matchedArguments = match.Groups[5].Success ? match.Groups[5].Value : "";
-                string[] arguments = CommandExecution.ArgumentsSpliter(matchedArguments);
+                var matchedReturnedVariable = match.Groups[3].Success ? match.Groups[3].Value : "";
+                var matchedCommand = match.Groups[4].Value;
+                var matchedArguments = match.Groups[5].Success ? match.Groups[5].Value : "";
+                var arguments = CommandExecution.ArgumentsSplitter(matchedArguments);
 
                 switch (matchedCommand)
                 {
@@ -89,13 +89,13 @@ namespace Comma_Dot_Visual_Language.Blocks
             {
                 match = regexOperation.Match(commandOptimized);
 
-                string matchedReturnedVariable = match.Groups[2].Value;
-                string matchedExpression = match.Groups[3].Value;
+                var matchedReturnedVariable = match.Groups[2].Value;
+                var matchedExpression = match.Groups[3].Value;
 
-                Parser parser = new Parser();
-                ExpressionNode e = parser.ParseExpression(matchedExpression);
+                var parser = new Parser();
+                var e = parser.ParseExpression(matchedExpression);
 
-                Runner.Variables[matchedReturnedVariable] = e.calculateValue();
+                Runner.Variables[matchedReturnedVariable] = e.CalculateValue();
             }
 
             return NextBlockPrimary;

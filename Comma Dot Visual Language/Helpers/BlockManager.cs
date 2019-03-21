@@ -7,12 +7,13 @@ namespace Comma_Dot_Visual_Language.Helpers
 {
     public class BlockManager
     {
-        private static Vector _beginStartPositon = new Vector(350, 100);
+        private static readonly Vector BeginStartPosition = new Vector(350, 100);
+
         private readonly List<Block> _blocks;
         private readonly Canvas _canvasBlocks;
         private readonly PropertiesManager _propertiesManager;
 
-        public static bool IsAddConectionMode = false;
+        public static bool IsAddConnectionMode = false;
         public static Block FirstBlockForConnection;
         public static Block SecondBlockForConnection;
 
@@ -29,7 +30,7 @@ namespace Comma_Dot_Visual_Language.Helpers
         {
             _blocks.Add(new BeginBlock(_canvasBlocks, _propertiesManager));
             _blocks[_blocks.Count - 1].Command = "Start";
-            _blocks[_blocks.Count - 1].SetPositon(_beginStartPositon.X, _beginStartPositon.Y);
+            _blocks[_blocks.Count - 1].SetPosition(BeginStartPosition.X, BeginStartPosition.Y);
 
             StartBlock = _blocks[_blocks.Count - 1];
 
@@ -72,7 +73,7 @@ namespace Comma_Dot_Visual_Language.Helpers
 
             FirstBlockForConnection = null;
             SecondBlockForConnection = null;
-            IsAddConectionMode = false;
+            IsAddConnectionMode = false;
         }
     }
 }

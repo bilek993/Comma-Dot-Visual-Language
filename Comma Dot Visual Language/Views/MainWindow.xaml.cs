@@ -35,7 +35,7 @@ namespace Comma_Dot_Visual_Language.Views
             _blockManager.CreateCommandBlock();
         }
 
-        private void MenuAdddInputBlockClick(object sender, RoutedEventArgs e)
+        private void MenuAddInputBlockClick(object sender, RoutedEventArgs e)
         {
             _blockManager.CreateInputBlock();
         }
@@ -57,7 +57,7 @@ namespace Comma_Dot_Visual_Language.Views
 
         private void MenuAddConnectionClick(object sender, RoutedEventArgs e)
         {
-            BlockManager.IsAddConectionMode = true;
+            BlockManager.IsAddConnectionMode = true;
             Mouse.OverrideCursor = Cursors.Pen;
         }
 
@@ -80,14 +80,13 @@ namespace Comma_Dot_Visual_Language.Views
         {
             _runner.SetStartBlock(_blockManager.StartBlock);
 
-            Thread thread = new Thread(_runner.Run);
+            var thread = new Thread(_runner.Run);
             thread.Start();
         }
 
         private void VariableTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_propertiesManager != null)
-            _propertiesManager.VariableTypeUpdate(VariableTypeComboBox.SelectedIndex);
+            _propertiesManager?.VariableTypeUpdate(VariableTypeComboBox.SelectedIndex);
         }
 
         private void MenuShowCommandsListClick(object sender, RoutedEventArgs e)

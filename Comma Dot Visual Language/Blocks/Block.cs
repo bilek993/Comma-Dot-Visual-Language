@@ -14,12 +14,9 @@ namespace Comma_Dot_Visual_Language.Blocks
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; private set; }
-        public static int BlocksCounter = 0;
         public Block NextBlockPrimary { get; private set; }
         public Block NextBlockOptional { get; private set; }
-        public int MaxConnectionsCount { get; private set; }
 
-        protected readonly Canvas CanvasBlocks;
         protected Shape Shape;
 
         private string _command = "";
@@ -29,17 +26,20 @@ namespace Comma_Dot_Visual_Language.Blocks
         private double _connectionOutput1Y;
         private double _connectionOutput2X;
         private double _connectionOutput2Y;
-        private PropertiesManager _propertiesManager;
+        private readonly PropertiesManager _propertiesManager;
         private string _prefixCommand = "";
         private string _suffixCommand = "";
         private TextBlock _textBlockCommand;
         private Line _lineConnectionPrimary;
         private Line _lineConnectionOptional;
         private bool _isPressed;
+        private readonly Canvas _canvasBlocks;
+        private readonly int _maxConnectionsCount;
+        private static int _blocksCounter = 0;
 
         public string Command
         {
-            get { return _command; }
+            get => _command;
             set
             {
                 _command = value;
@@ -49,7 +49,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         public double ConnectionInputX
         {
-            get { return _connectionInputX; }
+            get => _connectionInputX;
             set
             {
                 _connectionInputX = value;
@@ -58,7 +58,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         }
         public double ConnectionInputY
         {
-            get { return _connectionInputY; }
+            get => _connectionInputY;
             set
             {
                 _connectionInputY = value;
@@ -67,7 +67,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         }
         public double ConnectionOutput1X
         {
-            get { return _connectionOutput1X; }
+            get => _connectionOutput1X;
             set
             {
                 _connectionOutput1X = value;
@@ -76,7 +76,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         }
         public double ConnectionOutput1Y
         {
-            get { return _connectionOutput1Y; }
+            get => _connectionOutput1Y;
             set
             {
                 _connectionOutput1Y = value;
@@ -85,7 +85,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         }
         public double ConnectionOutput2X
         {
-            get { return _connectionOutput2X; }
+            get => _connectionOutput2X;
             set
             {
                 _connectionOutput2X = value;
@@ -94,7 +94,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         }
         public double ConnectionOutput2Y
         {
-            get { return _connectionOutput2Y; }
+            get => _connectionOutput2Y;
             set
             {
                 _connectionOutput2Y = value;
@@ -104,15 +104,15 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         protected Block(Canvas canvas, int maxConnectionsCount, PropertiesManager propertiesManager)
         {
-            Id = BlocksCounter++;
-            CanvasBlocks = canvas;
-            MaxConnectionsCount = maxConnectionsCount;
+            Id = _blocksCounter++;
+            _canvasBlocks = canvas;
+            _maxConnectionsCount = maxConnectionsCount;
             _propertiesManager = propertiesManager;
         }
 
         protected void AddShapeToCanvas()
         {
-            CanvasBlocks.Children.Add(Shape);
+            _canvasBlocks.Children.Add(Shape);
             ChildrenAddEvents();
         }
 
@@ -125,15 +125,15 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             _prefixCommand = prefix;
             _suffixCommand = suffix;
-            CanvasBlocks.Children.Add(_textBlockCommand);
+            _canvasBlocks.Children.Add(_textBlockCommand);
             ChildrenAddEvents();
         }
 
         private void ChildrenAddEvents()
         {
-            CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
-            CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
-            CanvasBlocks.Children[CanvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
+            _canvasBlocks.Children[_canvasBlocks.Children.Count - 1].MouseLeftButtonDown += OnMouseLeftButtonDown;
+            _canvasBlocks.Children[_canvasBlocks.Children.Count - 1].MouseLeftButtonUp += OnMouseLeftButtonUp;
+            _canvasBlocks.Children[_canvasBlocks.Children.Count - 1].MouseMove += OnMouseMove;
         }
 
         private void OnMouseMove(object sender, MouseEventArgs mouseEventArgs)
@@ -141,11 +141,11 @@ namespace Comma_Dot_Visual_Language.Blocks
             if (!_isPressed)
                 return;
 
-            var mousePosition = mouseEventArgs.GetPosition(CanvasBlocks);
-            SetPositon(mousePosition.X - (Shape.ActualWidth / 2), mousePosition.Y - (Shape.ActualHeight / 2));
+            var mousePosition = mouseEventArgs.GetPosition(_canvasBlocks);
+            SetPosition(mousePosition.X - (Shape.ActualWidth / 2), mousePosition.Y - (Shape.ActualHeight / 2));
         }
 
-        public void SetPositon(double left, double top)
+        public void SetPosition(double left, double top)
         {
             Canvas.SetLeft(Shape, left);
             Canvas.SetTop(Shape, top);
@@ -184,7 +184,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         protected void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            if (BlockManager.IsAddConectionMode)
+            if (BlockManager.IsAddConnectionMode)
             {
                 if (BlockManager.FirstBlockForConnection == null)
                     BlockManager.FirstBlockForConnection = this;
@@ -211,7 +211,7 @@ namespace Comma_Dot_Visual_Language.Blocks
                 return;
             }
 
-            if (MaxConnectionsCount == 0)
+            if (_maxConnectionsCount == 0)
             {
                 MessageBox.Show("Outputs are not supported by this block.", "Connection error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -223,7 +223,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
                 _lineConnectionPrimary = CreateConnectionLine(block, 1);
             }
-            else if (MaxConnectionsCount == 2 && NextBlockOptional == null)
+            else if (_maxConnectionsCount == 2 && NextBlockOptional == null)
             {
                 NextBlockOptional = block;
 
@@ -232,20 +232,19 @@ namespace Comma_Dot_Visual_Language.Blocks
             else
             {
                 MessageBox.Show("You cannot add another connection, because all outputs are already used.", "Connection error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
             }
         }
 
         private Line CreateConnectionLine(Block secondBlock, int outputIndex)
         {
-            Line connectionLine = new Line()
+            var connectionLine = new Line()
             {
                 Stroke = Brushes.Black
             };
 
-            CanvasBlocks.Children.Add(connectionLine);
+            _canvasBlocks.Children.Add(connectionLine);
 
-            Binding binding = new Binding
+            var binding = new Binding
             {
                 Source = this,
                 Path = new PropertyPath("ConnectionOutput" + outputIndex + "X")
@@ -286,11 +285,11 @@ namespace Comma_Dot_Visual_Language.Blocks
             switch (connectionId)
             {
                 case 0:
-                    CanvasBlocks.Children.Remove(_lineConnectionPrimary);
+                    _canvasBlocks.Children.Remove(_lineConnectionPrimary);
                     NextBlockPrimary = null;
                     break;
                 case 1:
-                    CanvasBlocks.Children.Remove(_lineConnectionOptional);
+                    _canvasBlocks.Children.Remove(_lineConnectionOptional);
                     NextBlockOptional = null;
                     break;
             }

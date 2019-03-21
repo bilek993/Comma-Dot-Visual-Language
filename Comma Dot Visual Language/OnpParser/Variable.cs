@@ -9,22 +9,23 @@ namespace Comma_Dot_Visual_Language.OnpParser
 {
     public class Variable : ExpressionNode
     {
-        private string _variableName;
+        private readonly string _variableName;
 
         public Variable(string variableName)
         {
             _variableName = variableName;
         }
 
-        public override float calculateValue()
+        public override float CalculateValue()
         {
-            if (Runner.Variables[_variableName].GetType() == typeof(int))
+            switch (Runner.Variables[_variableName])
             {
-                Value = (int)Runner.Variables[_variableName];
-            }
-            else if (Runner.Variables[_variableName].GetType() == typeof(float))
-            {
-                Value = (float)Runner.Variables[_variableName];
+                case int i:
+                    Value = i;
+                    break;
+                case float f:
+                    Value = f;
+                    break;
             }
 
             return Value;

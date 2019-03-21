@@ -15,7 +15,7 @@ namespace Comma_Dot_Visual_Language.OnpParser
             Value = value;
         }
 
-        public virtual float calculateValue()
+        public virtual float CalculateValue()
         {
             return Value;
         }

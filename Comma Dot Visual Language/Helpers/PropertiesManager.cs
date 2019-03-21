@@ -15,12 +15,12 @@ namespace Comma_Dot_Visual_Language.Helpers
         private readonly ComboBox _typesComboBox;
         private readonly DockPanel _variableDockPanel;
         private readonly DockPanel _optionalOutputDockPanel;
-        private readonly DockPanel _primiaryOutputDockPanel;
+        private readonly DockPanel _primaryOutputDockPanel;
         private const string NoneValue = "None";
 
         public PropertiesManager(Label labelId, Label labelOutputPrimary, Label labelOutputOptional,
             TextBox textBoxCommand, ComboBox typesComboBox, DockPanel variableDockPanel, DockPanel optionalOutputDockPanel,
-            DockPanel primiaryOutputDockPanel)
+            DockPanel primaryOutputDockPanel)
         {
             _labelId = labelId;
             _labelOutputPrimary = labelOutputPrimary;
@@ -29,14 +29,14 @@ namespace Comma_Dot_Visual_Language.Helpers
             _typesComboBox = typesComboBox;
             _variableDockPanel = variableDockPanel;
             _optionalOutputDockPanel = optionalOutputDockPanel;
-            _primiaryOutputDockPanel = primiaryOutputDockPanel;
+            _primaryOutputDockPanel = primaryOutputDockPanel;
 
             _labelId.Content = "";
             _labelOutputPrimary.Content = "";
             _labelOutputOptional.Content = "";
         }
 
-        private string GenerateOutputContent(string id, string command)
+        private static string GenerateOutputContent(string id, string command)
         {
             return "Block " + id + " (" + command + ")";
         }
@@ -78,7 +78,7 @@ namespace Comma_Dot_Visual_Language.Helpers
             }
 
             _optionalOutputDockPanel.Visibility = SelectedBlock.GetType() == typeof(IfBlock) ? Visibility.Visible : Visibility.Collapsed;
-            _primiaryOutputDockPanel.Visibility = SelectedBlock.GetType() == typeof(EndBlock) ? Visibility.Collapsed : Visibility.Visible;
+            _primaryOutputDockPanel.Visibility = SelectedBlock.GetType() == typeof(EndBlock) ? Visibility.Collapsed : Visibility.Visible;
 
             _textBoxCommand.Text = SelectedBlock.Command;
         }
@@ -94,7 +94,7 @@ namespace Comma_Dot_Visual_Language.Helpers
             if (SelectedBlock != null && SelectedBlock.GetType() != typeof(InputBlock))
                 return;
 
-            InputBlock inputBlock = (InputBlock) SelectedBlock;
+            var inputBlock = (InputBlock) SelectedBlock;
             inputBlock.VarType = (VariableType)value;
         }
 

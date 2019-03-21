@@ -20,29 +20,37 @@ namespace Comma_Dot_Visual_Language.OnpParser
 
     public class Operator : ExpressionNode
     {
-        private Operation operation;
-        private ExpressionNode operand1;
-        private ExpressionNode operand2;
+        private readonly Operation _operation;
+        private ExpressionNode _operand1;
+        private readonly ExpressionNode _operand2;
 
         public Operator(Operation operation, ExpressionNode operand1, ExpressionNode operand2)
         {
-            this.operation = operation;
-            this.operand1 = operand1;
-            this.operand2 = operand2;
+            _operation = operation;
+            _operand1 = operand1;
+            _operand2 = operand2;
         }
 
-        public override float calculateValue()
+        public override float CalculateValue()
         {
-            if (operation == Operation.Addition)
-                Value = operand1.calculateValue() + operand2.calculateValue();
-            else if (operation == Operation.Subtraction)
-                Value = operand1.calculateValue() - operand2.calculateValue();
-            else if (operation == Operation.Multiplication)
-                Value = operand1.calculateValue() * operand2.calculateValue();
-            else if (operation == Operation.Division)
-                Value = operand1.calculateValue() / operand2.calculateValue();
-            else if (operation == Operation.Power)
-                Value = (float)Math.Pow(operand1.calculateValue(), operand2.calculateValue());
+            switch (_operation)
+            {
+                case Operation.Addition:
+                    Value = _operand1.CalculateValue() + _operand2.CalculateValue();
+                    break;
+                case Operation.Subtraction:
+                    Value = _operand1.CalculateValue() - _operand2.CalculateValue();
+                    break;
+                case Operation.Multiplication:
+                    Value = _operand1.CalculateValue() * _operand2.CalculateValue();
+                    break;
+                case Operation.Division:
+                    Value = _operand1.CalculateValue() / _operand2.CalculateValue();
+                    break;
+                case Operation.Power:
+                    Value = (float)Math.Pow(_operand1.CalculateValue(), _operand2.CalculateValue());
+                    break;
+            }
 
             return Value;
         }

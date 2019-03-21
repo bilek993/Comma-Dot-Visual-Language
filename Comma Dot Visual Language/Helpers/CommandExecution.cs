@@ -9,78 +9,76 @@ namespace Comma_Dot_Visual_Language.Helpers
 {
     class CommandExecution
     {
-        public static string[] ArgumentsSpliter(string arguments)
+        public static string[] ArgumentsSplitter(string arguments)
         {
-            return arguments.Split(new char[] { ',' }, StringSplitOptions.None);
+            return arguments.Split(new [] { ',' }, StringSplitOptions.None);
         }
 
         public static void IncrementValues(string[] arguments)
         {
-            foreach (string t in arguments)
+            foreach (var t in arguments)
             {
-                if (Runner.Variables[t].GetType() == typeof(int))
+                switch (Runner.Variables[t])
                 {
-                    Runner.Variables[t] = (int)Runner.Variables[t] + 1;
-                }
-                else if (Runner.Variables[t].GetType() == typeof(float))
-                {
-                    Runner.Variables[t] = (float)Runner.Variables[t] + 1;
-                }
-                else
-                {
-                    throw new ArgumentException();
+                    case int i:
+                        Runner.Variables[t] = i + 1;
+                        break;
+                    case float f:
+                        Runner.Variables[t] = f + 1;
+                        break;
+                    default:
+                        throw new ArgumentException();
                 }
             }
         }
 
         public static void DecrementValues(string[] arguments)
         {
-            foreach (string t in arguments)
+            foreach (var t in arguments)
             {
-                if (Runner.Variables[t].GetType() == typeof(int))
+                switch (Runner.Variables[t])
                 {
-                    Runner.Variables[t] = (int)Runner.Variables[t] - 1;
-                }
-                else if (Runner.Variables[t].GetType() == typeof(float))
-                {
-                    Runner.Variables[t] = (float)Runner.Variables[t] - 1;
-                }
-                else
-                {
-                    throw new ArgumentException();
+                    case int i:
+                        Runner.Variables[t] = i - 1;
+                        break;
+                    case float f:
+                        Runner.Variables[t] = f - 1;
+                        break;
+                    default:
+                        throw new ArgumentException();
                 }
             }
         }
 
         public static void Math_Pi(string returnedVariable)
         {
-            if (Runner.Variables[returnedVariable].GetType() == typeof(int))
+            switch (Runner.Variables[returnedVariable])
             {
-                Runner.Variables[returnedVariable] = (int)Math.PI;
-            }
-            else if (Runner.Variables[returnedVariable].GetType() == typeof(float))
-            {
-                Runner.Variables[returnedVariable] = Math.PI;
-            }
-            else
-            {
-                Runner.Variables[returnedVariable] = Math.PI.ToString(CultureInfo.InvariantCulture);
+                case int _:
+                    Runner.Variables[returnedVariable] = (int)Math.PI;
+                    break;
+                case float _:
+                    Runner.Variables[returnedVariable] = Math.PI;
+                    break;
+                default:
+                    Runner.Variables[returnedVariable] = Math.PI.ToString(CultureInfo.InvariantCulture);
+                    break;
             }
         }
 
         public static void Math_e(string returnedVariable)
         {
-            if (Runner.Variables[returnedVariable].GetType() == typeof(int))
+            switch (Runner.Variables[returnedVariable])
             {
-                Runner.Variables[returnedVariable] = (int)Math.E;
-            }
-            else if (Runner.Variables[returnedVariable].GetType() == typeof(float))
-            {
-                Runner.Variables[returnedVariable] = Math.E;
-            }
-            else
-            {
-                Runner.Variables[returnedVariable] = Math.E.ToString(CultureInfo.InvariantCulture);
+                case int _:
+                    Runner.Variables[returnedVariable] = (int)Math.E;
+                    break;
+                case float _:
+                    Runner.Variables[returnedVariable] = Math.E;
+                    break;
+                default:
+                    Runner.Variables[returnedVariable] = Math.E.ToString(CultureInfo.InvariantCulture);
+                    break;
             }
         }
 

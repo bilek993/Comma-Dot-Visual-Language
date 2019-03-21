@@ -8,63 +8,70 @@ namespace Comma_Dot_Visual_Language.OnpParser
 {
     public class Parser
     {
-        private static readonly int[] _operatorsPriorities = new int[] { 1, 1, 2, 2, 3, 0, 1 };
+        private static readonly int[] OperatorsPriorities = { 1, 1, 2, 2, 3, 0, 1 };
 
-        private Stack<Operation> _stack = new Stack<Operation>();
-        private Stack<ExpressionNode> _operationTreeElements = new Stack<ExpressionNode>();
+        private readonly Stack<Operation> _stack = new Stack<Operation>();
+        private readonly Stack<ExpressionNode> _operationTreeElements = new Stack<ExpressionNode>();
 
         private Operation ParseOperator(char c)
         {
-            Operation op = Operation.Undefined;
-            if (c == '+')
-                op = Operation.Addition;
-            else if (c == '-')
-                op = Operation.Subtraction;
-            else if (c == '*')
-                op = Operation.Multiplication;
-            else if (c == '/')
-                op = Operation.Division;
-            else if (c == '^')
-                op = Operation.Power;
-            else if (c == '(')
-                op = Operation.Bracket1;
-            else if (c == ')')
-                op = Operation.Bracket2;
+            var op = Operation.Undefined;
+            switch (c)
+            {
+                case '+':
+                    op = Operation.Addition;
+                    break;
+                case '-':
+                    op = Operation.Subtraction;
+                    break;
+                case '*':
+                    op = Operation.Multiplication;
+                    break;
+                case '/':
+                    op = Operation.Division;
+                    break;
+                case '^':
+                    op = Operation.Power;
+                    break;
+                case '(':
+                    op = Operation.Bracket1;
+                    break;
+                case ')':
+                    op = Operation.Bracket2;
+                    break;
+            }
 
             return op;
         }
 
         private void AddedValueToTree(string value)
         {
-            float result;
-            if (float.TryParse(value, out result))
-                _operationTreeElements.Push(new ExpressionNode(result));
-            else
-                _operationTreeElements.Push(new Variable(value));
-
+            _operationTreeElements.Push(float.TryParse(value, out var result)
+                ? new ExpressionNode(result)
+                : new Variable(value));
         }
 
         private void AddedNewExpressionToTree(Operation operation)
         {
-            ExpressionNode operand2 = _operationTreeElements.Pop();
-            ExpressionNode operand1 = _operationTreeElements.Pop();
-            Operator newExpression = new Operator(operation, operand1, operand2);
+            var operand2 = _operationTreeElements.Pop();
+            var operand1 = _operationTreeElements.Pop();
+            var newExpression = new Operator(operation, operand1, operand2);
             _operationTreeElements.Push(newExpression);
         }
 
         public ExpressionNode ParseExpression(string expression)
         {
-            string value = "";
+            var value = "";
 
-            foreach (char c in expression)
+            foreach (var c in expression)
             {
-                Operation op = ParseOperator(c);
+                var op = ParseOperator(c);
                                 
                 if (op != Operation.Undefined)
                 {
                     if (op == Operation.Bracket2)
                     {
-                        if (!String.IsNullOrEmpty(value))
+                        if (!string.IsNullOrEmpty(value))
                         {
                             AddedValueToTree(value);
                             value = "";
@@ -72,14 +79,11 @@ namespace Comma_Dot_Visual_Language.OnpParser
 
                         while (_stack.Count > 0)
                         {
-                            Operation o = _stack.Pop();
+                            var o = _stack.Pop();
 
                             if (o == Operation.Bracket1)
                                 break;
-                            else
-                            {
-                                AddedNewExpressionToTree(o);
-                            }
+                            AddedNewExpressionToTree(o);
                         }
                     }
                     else if (op == Operation.Bracket1)
@@ -88,15 +92,15 @@ namespace Comma_Dot_Visual_Language.OnpParser
                     }
                     else
                     {
-                        if (!String.IsNullOrEmpty(value))
+                        if (!string.IsNullOrEmpty(value))
                         {
                             AddedValueToTree(value);
                             value = "";
                         }
 
-                        while (_stack.Count > 0 && _operatorsPriorities[(int)_stack.First()] >= _operatorsPriorities[(int)op])
+                        while (_stack.Count > 0 && OperatorsPriorities[(int)_stack.First()] >= OperatorsPriorities[(int)op])
                         {
-                            Operation o = _stack.Pop();
+                            var o = _stack.Pop();
 
                             AddedNewExpressionToTree(o);
                         }
@@ -110,15 +114,14 @@ namespace Comma_Dot_Visual_Language.OnpParser
                 }
             }
 
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 AddedValueToTree(value);
-                value = "";
             }
 
             while (_stack.Count > 0)
             {
-                Operation o = _stack.Pop();
+                var o = _stack.Pop();
 
                 AddedNewExpressionToTree(o);
             }

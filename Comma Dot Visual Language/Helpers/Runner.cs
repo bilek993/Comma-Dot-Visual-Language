@@ -7,13 +7,12 @@ namespace Comma_Dot_Visual_Language.Helpers
 {
     class Runner
     {
-        public static Dictionary<string, object> Variables = new Dictionary<string, object>();
+        public static readonly Dictionary<string, object> Variables = new Dictionary<string, object>();
 
         private Block _currentBlock;
 
         public Runner()
         {
-
         }
 
         public void SetStartBlock(Block block)
