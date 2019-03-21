@@ -13,7 +13,7 @@ namespace Comma_Dot_Visual_Language.OnpParser
         private readonly Stack<Operation> _stack = new Stack<Operation>();
         private readonly Stack<ExpressionNode> _operationTreeElements = new Stack<ExpressionNode>();
 
-        private Operation ParseOperator(char c)
+        private static Operation ParseOperator(char c)
         {
             var op = Operation.Undefined;
             switch (c)

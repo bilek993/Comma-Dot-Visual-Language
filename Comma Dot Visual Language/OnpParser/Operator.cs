@@ -21,7 +21,7 @@ namespace Comma_Dot_Visual_Language.OnpParser
     public class Operator : ExpressionNode
     {
         private readonly Operation _operation;
-        private ExpressionNode _operand1;
+        private readonly ExpressionNode _operand1;
         private readonly ExpressionNode _operand2;
 
         public Operator(Operation operation, ExpressionNode operand1, ExpressionNode operand2)

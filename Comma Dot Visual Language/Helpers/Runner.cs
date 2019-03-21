@@ -11,10 +11,6 @@ namespace Comma_Dot_Visual_Language.Helpers
 
         private Block _currentBlock;
 
-        public Runner()
-        {
-        }
-
         public void SetStartBlock(Block block)
         {
             _currentBlock = block;
