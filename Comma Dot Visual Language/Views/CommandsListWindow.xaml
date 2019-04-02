@@ -5,51 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Comma_Dot_Visual_Language"
         mc:Ignorable="d"
+        Background="#404040"
         Title="CommandsListWindow" Height="480" Width="640">
     <Grid>
-        <RichTextBox IsReadOnly="True" BorderThickness="0" Margin="5">
+        <RichTextBox IsReadOnly="True" BorderThickness="0" Margin="5" Background="#404040">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="List of commands:" FontSize="24" FontWeight="Bold" FontStyle="Italic" TextDecorations="{x:Null}"/>
+                    <Run Text="List of commands:" FontSize="24" FontWeight="Bold" FontStyle="Italic" TextDecorations="{x:Null}" Foreground="White"/>
                     <LineBreak/>
 
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="Increment values:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <Run Text="Increment values:" TextDecorations="{x:Null}" FontWeight="Bold" Foreground="White"/>
                     <LineBreak/>
-                    <Run Text="Inc(valueToIncrement,..)"/>
+                    <Run Text="Inc(valueToIncrement,..)" Foreground="White"/>
                     <LineBreak/>
                     <Run Text="(INT|FLOAT) valueToIncrement" Foreground="#FFC8C8C8"/>
                     
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="Decrement values:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <Run Text="Decrement values:" TextDecorations="{x:Null}" FontWeight="Bold" Foreground="White"/>
                     <LineBreak/>
-                    <Run Text="Dec(valueToDecrement,..)"/>
+                    <Run Text="Dec(valueToDecrement,..)" Foreground="White"/>
                     <LineBreak/>
                     <Run Text="(INT|FLOAT) valueToDecrement" Foreground="#FFC8C8C8"/>
 
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="π value:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <Run Text="π value:" TextDecorations="{x:Null}" FontWeight="Bold" Foreground="White"/>
                     <LineBreak/>
-                    <Run Text="piValue = Pi()"/>
+                    <Run Text="piValue = Pi()" Foreground="White"/>
                     <LineBreak/>
                     <Run Text="(INT|FLOAT|STRING) piValue" Foreground="#FFC8C8C8"/>
                     
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="Euler's number:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <Run Text="Euler's number:" TextDecorations="{x:Null}" FontWeight="Bold" Foreground="White"/>
                     <LineBreak/>
-                    <Run Text="eValue = E()"/>
+                    <Run Text="eValue = E()" Foreground="White"/>
                     <LineBreak/>
                     <Run Text="(INT|FLOAT|STRING) eValue" Foreground="#FFC8C8C8"/>
 
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="Modulo operation:" TextDecorations="{x:Null}" FontWeight="Bold"/>
+                    <Run Text="Modulo operation:" TextDecorations="{x:Null}" FontWeight="Bold" Foreground="White"/>
                     <LineBreak/>
-                    <Run Text="result = Mod(dividend, divisor)"/>
+                    <Run Text="result = Mod(dividend, divisor)" Foreground="White"/>
                     <LineBreak/>
                     <Run Text="(INT) result" Foreground="#FFC8C8C8"/>
                     <LineBreak/>
