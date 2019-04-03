@@ -12,12 +12,7 @@ namespace Comma_Dot_Visual_Language.Blocks
     {
         public IfBlock(Canvas canvas, PropertiesManager propertiesManager) : base(canvas, 2, propertiesManager)
         {
-            Shape = new Polygon()
-            {
-                Stroke = new SolidColorBrush(Colors.Black),
-                Fill = new SolidColorBrush(Colors.White),
-                Points = { new Point(0, 15), new Point(50, 30), new Point(100, 15), new Point(50, 0) }
-            };
+            Shape = ImageGenerator.GenerateBlockImage("if_block");
 
             AddShapeToCanvas();
             AddTextBlockToCanvas("if (", ")");

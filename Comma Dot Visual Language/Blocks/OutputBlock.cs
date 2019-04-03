@@ -10,12 +10,7 @@ namespace Comma_Dot_Visual_Language.Blocks
     {
         public OutputBlock(Canvas canvas, PropertiesManager propertiesManager) : base(canvas, 1, propertiesManager)
         {
-            Shape = new Polygon()
-            {
-                Stroke = new SolidColorBrush(Colors.Black),
-                Fill = new SolidColorBrush(Colors.White),
-                Points = { new Point(0, 0), new Point(20, 30), new Point(100, 30), new Point(80, 0) }
-            };
+            Shape = ImageGenerator.GenerateBlockImage("io_block");
 
             AddShapeToCanvas();
             AddTextBlockToCanvas("Output: ");

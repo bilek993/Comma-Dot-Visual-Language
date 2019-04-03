@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ImageGenerator.cs" />
     <Compile Include="OnpParser\ExpressionNode.cs" />
     <Compile Include="OnpParser\Operator.cs" />
     <Compile Include="OnpParser\Parser.cs" />
@@ -118,6 +119,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\begin_block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\end_block.png" />
+    <Resource Include="Images\if_block.png" />
+    <Resource Include="Images\io_block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\command_block.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

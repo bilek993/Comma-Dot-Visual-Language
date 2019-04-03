@@ -10,13 +10,7 @@ namespace Comma_Dot_Visual_Language.Blocks
     {
         public EndBlock(Canvas canvas, PropertiesManager propertiesManager) : base(canvas, 0, propertiesManager)
         {
-            Shape = new Ellipse()
-            {
-                Stroke = new SolidColorBrush(Colors.Black),
-                Fill = new SolidColorBrush(Colors.White),
-                Width = 100,
-                Height = 30
-            };
+            Shape = ImageGenerator.GenerateBlockImage("end_block");
 
             AddShapeToCanvas();
             AddTextBlockToCanvas();

@@ -13,13 +13,7 @@ namespace Comma_Dot_Visual_Language.Blocks
     {
         public CommandBlock(Canvas canvas, PropertiesManager propertiesManager) : base(canvas, 1, propertiesManager)
         {
-            Shape = new Rectangle()
-            {
-                Stroke = new SolidColorBrush(Colors.Black),
-                Fill = new SolidColorBrush(Colors.White),
-                Width = 100,
-                Height = 30
-            };
+            Shape = ImageGenerator.GenerateBlockImage("command_block");
 
             AddShapeToCanvas();
             AddTextBlockToCanvas();

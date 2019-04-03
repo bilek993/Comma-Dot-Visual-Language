@@ -20,7 +20,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         public Block NextBlockOptional { get; private set; }
         public List<Block> PreviousBlocks { get; private set; }
 
-        protected Shape Shape;
+        protected Image Shape;
 
         private static readonly double ArrowLength = 20;
 
