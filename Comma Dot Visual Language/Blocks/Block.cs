@@ -213,7 +213,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         {
             _textBlockCommand = new TextBlock()
             {
-                Foreground = new SolidColorBrush(Colors.Black)
+                Foreground = new SolidColorBrush(Colors.White),
             };
 
             _prefixCommand = prefix;
@@ -243,18 +243,14 @@ namespace Comma_Dot_Visual_Language.Blocks
             Canvas.SetLeft(Shape, left);
             Canvas.SetTop(Shape, top);
 
-            if (Shape.ActualWidth != 0 && Shape.ActualHeight != 0)
-            {
-                Canvas.SetLeft(_textBlockCommand, left + Shape.ActualWidth / 2 - _textBlockCommand.ActualWidth / 2);
-                Canvas.SetTop(_textBlockCommand, top + Shape.ActualHeight / 2 - _textBlockCommand.ActualHeight / 2);
-            }
-            else
+            if (Shape.ActualWidth == 0 || Shape.ActualHeight == 0)
             {
                 Shape.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 _textBlockCommand.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                Canvas.SetLeft(_textBlockCommand, left + Shape.DesiredSize.Width / 2 - _textBlockCommand.DesiredSize.Width / 2);
-                Canvas.SetTop(_textBlockCommand, top + Shape.DesiredSize.Height / 2 - _textBlockCommand.DesiredSize.Height / 2);
             }
+
+            Canvas.SetLeft(_textBlockCommand, left + 20f);
+            Canvas.SetTop(_textBlockCommand, top + 9.5f);
 
             SetConnectionsPositions(left, top);
 
