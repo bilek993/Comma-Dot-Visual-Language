@@ -387,7 +387,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         {
             var connectionLine = new Line()
             {
-                Stroke = Brushes.Black
+                Stroke = Brushes.White
             };
 
             _canvasBlocks.Children.Add(connectionLine);
@@ -429,7 +429,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         {
             var arrowLine1 = new Line()
             {
-                Stroke = Brushes.Black
+                Stroke = Brushes.White
             };
 
             _canvasBlocks.Children.Add(arrowLine1);
@@ -465,7 +465,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             var arrowLine2 = new Line()
             {
-                Stroke = Brushes.Black
+                Stroke = Brushes.White
             };
 
             _canvasBlocks.Children.Add(arrowLine2);
