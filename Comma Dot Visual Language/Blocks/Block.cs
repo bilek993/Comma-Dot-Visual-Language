@@ -191,9 +191,6 @@ namespace Comma_Dot_Visual_Language.Blocks
             }
         }
 
-
-
-
         protected Block(Canvas canvas, int maxConnectionsCount, PropertiesManager propertiesManager)
         {
             Id = _blocksCounter++;
@@ -265,10 +262,10 @@ namespace Comma_Dot_Visual_Language.Blocks
         {
 
             ConnectionInputX = shapeLeft + Shape.ActualWidth / 2;
-            ConnectionInputY = shapeTop;
+            ConnectionInputY = shapeTop + 4f;
 
             ConnectionOutput1X = ConnectionOutput2X = shapeLeft + Shape.ActualWidth / 2;
-            ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + Shape.ActualHeight;
+            ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + Shape.ActualHeight - 14f;
         }
 
         private void SetArrowPositions()

@@ -22,13 +22,13 @@ namespace Comma_Dot_Visual_Language.Blocks
         protected override void SetConnectionsPositions(double shapeLeft, double shapeTop)
         {
             ConnectionInputX = shapeLeft + Shape.ActualWidth / 2;
-            ConnectionInputY = shapeTop;
+            ConnectionInputY = shapeTop + 4f;
 
-            ConnectionOutput1X = shapeLeft;
-            ConnectionOutput1Y = shapeTop + Shape.ActualHeight / 2;
+            ConnectionOutput1X = shapeLeft + 10.5f;
+            ConnectionOutput1Y = shapeTop + Shape.ActualHeight / 2 + 8.5f;
 
-            ConnectionOutput2X = shapeLeft + Shape.ActualWidth;
-            ConnectionOutput2Y = shapeTop + Shape.ActualHeight / 2;
+            ConnectionOutput2X = shapeLeft + Shape.ActualWidth - 10.5f;
+            ConnectionOutput2Y = shapeTop + Shape.ActualHeight / 2 + 8.5f;
         }
 
         public override Block Run()
