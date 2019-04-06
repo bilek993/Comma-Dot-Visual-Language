@@ -276,9 +276,16 @@ namespace Comma_Dot_Visual_Language.Blocks
             {
                 var pathGeometry = _lineConnectionPrimary.Data as PathGeometry;
 
+                double xMod = 0;
+                if (NextBlockPrimary.ConnectionInputY < ConnectionOutput1Y)
+                {
+                    xMod = (ConnectionOutput1X - NextBlockPrimary.ConnectionInputX);
+                    xMod = xMod / Math.Abs(xMod) * 200;
+                }
+
                 pathGeometry.Figures[0].StartPoint = new Point(ConnectionOutput1X, ConnectionOutput1Y);
-                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point1 = new Point(ConnectionOutput1X, ConnectionOutput1Y + 100);
-                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point2 = new Point(NextBlockPrimary.ConnectionInputX, NextBlockPrimary.ConnectionInputY - 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point1 = new Point(ConnectionOutput1X + xMod, ConnectionOutput1Y + 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point2 = new Point(NextBlockPrimary.ConnectionInputX + xMod, NextBlockPrimary.ConnectionInputY - 100);
                 (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point3 = new Point(NextBlockPrimary.ConnectionInputX, NextBlockPrimary.ConnectionInputY);
             }
 
@@ -286,9 +293,16 @@ namespace Comma_Dot_Visual_Language.Blocks
             {
                 var pathGeometry = _lineConnectionOptional.Data as PathGeometry;
 
+                double xMod = 0;
+                if (NextBlockOptional.ConnectionInputY < ConnectionOutput2Y)
+                {
+                    xMod = (ConnectionOutput2X - NextBlockOptional.ConnectionInputX);
+                    xMod = xMod / Math.Abs(xMod) * 200;
+                }
+
                 pathGeometry.Figures[0].StartPoint = new Point(ConnectionOutput2X, ConnectionOutput2Y);
-                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point1 = new Point(ConnectionOutput2X, ConnectionOutput2Y + 100);
-                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point2 = new Point(NextBlockOptional.ConnectionInputX, NextBlockOptional.ConnectionInputY - 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point1 = new Point(ConnectionOutput2X + xMod, ConnectionOutput2Y + 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point2 = new Point(NextBlockOptional.ConnectionInputX + xMod, NextBlockOptional.ConnectionInputY - 100);
                 (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point3 = new Point(NextBlockOptional.ConnectionInputX, NextBlockOptional.ConnectionInputY);
             }
         }
@@ -505,12 +519,14 @@ namespace Comma_Dot_Visual_Language.Blocks
                     _canvasBlocks.Children.Remove(_connection1arrow1);
                     _canvasBlocks.Children.Remove(_connection1arrow2);
                     NextBlockPrimary = null;
+                    _lineConnectionPrimary = null;
                     break;
                 case 1:
                     _canvasBlocks.Children.Remove(_lineConnectionOptional);
                     _canvasBlocks.Children.Remove(_connection2arrow1);
                     _canvasBlocks.Children.Remove(_connection2arrow2);
                     NextBlockOptional = null;
+                    _lineConnectionOptional = null;
                     break;
             }
         }
