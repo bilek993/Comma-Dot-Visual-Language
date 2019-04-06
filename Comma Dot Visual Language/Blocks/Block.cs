@@ -22,7 +22,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         protected Image Shape;
 
-        private static readonly double ArrowLength = 20;
+        private static readonly double ArrowLength = 5;
 
         private string _command = "";
         private double _connectionInputX;
@@ -43,8 +43,8 @@ namespace Comma_Dot_Visual_Language.Blocks
         private string _prefixCommand = "";
         private string _suffixCommand = "";
         private TextBlock _textBlockCommand;
-        private Line _lineConnectionPrimary;
-        private Line _lineConnectionOptional;
+        private Path _lineConnectionPrimary;
+        private Path _lineConnectionOptional;
         private Line _connection1arrow1;
         private Line _connection1arrow2;
         private Line _connection2arrow1;
@@ -252,9 +252,11 @@ namespace Comma_Dot_Visual_Language.Blocks
             SetConnectionsPositions(left, top);
 
             SetArrowPositions();
+            SetBezierCurvesPosition();
             foreach (Block block in PreviousBlocks)
             {
                 block.SetArrowPositions();
+                block.SetBezierCurvesPosition();
             }
         }
 
@@ -268,54 +270,45 @@ namespace Comma_Dot_Visual_Language.Blocks
             ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + Shape.ActualHeight - 14f;
         }
 
+        private void SetBezierCurvesPosition()
+        {
+            if (_lineConnectionPrimary != null)
+            {
+                var pathGeometry = _lineConnectionPrimary.Data as PathGeometry;
+
+                pathGeometry.Figures[0].StartPoint = new Point(ConnectionOutput1X, ConnectionOutput1Y);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point1 = new Point(ConnectionOutput1X, ConnectionOutput1Y + 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point2 = new Point(NextBlockPrimary.ConnectionInputX, NextBlockPrimary.ConnectionInputY - 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point3 = new Point(NextBlockPrimary.ConnectionInputX, NextBlockPrimary.ConnectionInputY);
+            }
+
+            if (_lineConnectionOptional != null)
+            {
+                var pathGeometry = _lineConnectionOptional.Data as PathGeometry;
+
+                pathGeometry.Figures[0].StartPoint = new Point(ConnectionOutput2X, ConnectionOutput2Y);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point1 = new Point(ConnectionOutput2X, ConnectionOutput2Y + 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point2 = new Point(NextBlockOptional.ConnectionInputX, NextBlockOptional.ConnectionInputY - 100);
+                (pathGeometry.Figures[0].Segments[0] as BezierSegment).Point3 = new Point(NextBlockOptional.ConnectionInputX, NextBlockOptional.ConnectionInputY);
+            }
+        }
+
         private void SetArrowPositions()
         {
             if (NextBlockPrimary != null)
             {
-                double connectionDirectionX = _connectionOutput1X - NextBlockPrimary.ConnectionInputX;
-                double connectionDirectionY = _connectionOutput1Y - NextBlockPrimary.ConnectionInputY;
-
-                double arrow1DirectionX = connectionDirectionX + connectionDirectionY;
-                double arrow1DirectionY = connectionDirectionY + (-connectionDirectionX);
-
-                double arrow2DirectionX = connectionDirectionX + (-connectionDirectionY);
-                double arrow2DirectionY = connectionDirectionY + connectionDirectionX;
-
-                double length = Math.Sqrt(arrow1DirectionX * arrow1DirectionX + arrow1DirectionY * arrow1DirectionY);
-
-                arrow1DirectionX = arrow1DirectionX / length * ArrowLength;
-                arrow1DirectionY = arrow1DirectionY / length * ArrowLength;
-                arrow2DirectionX = arrow2DirectionX / length * ArrowLength;
-                arrow2DirectionY = arrow2DirectionY / length * ArrowLength;
-
-                Connection1ArrowVector1X = NextBlockPrimary.ConnectionInputX + arrow1DirectionX;
-                Connection1ArrowVector1Y = NextBlockPrimary.ConnectionInputY + arrow1DirectionY;
-                Connection1ArrowVector2X = NextBlockPrimary.ConnectionInputX + arrow2DirectionX;
-                Connection1ArrowVector2Y = NextBlockPrimary.ConnectionInputY + arrow2DirectionY;
+                Connection1ArrowVector1X = NextBlockPrimary.ConnectionInputX - ArrowLength;
+                Connection1ArrowVector1Y = NextBlockPrimary.ConnectionInputY - ArrowLength;
+                Connection1ArrowVector2X = NextBlockPrimary.ConnectionInputX + ArrowLength;
+                Connection1ArrowVector2Y = NextBlockPrimary.ConnectionInputY - ArrowLength;
             }
 
             if (NextBlockOptional != null)
             {
-                double connectionDirectionX = _connectionOutput2X - NextBlockOptional.ConnectionInputX;
-                double connectionDirectionY = _connectionOutput2Y - NextBlockOptional.ConnectionInputY;
-
-                double arrow1DirectionX = connectionDirectionX + connectionDirectionY;
-                double arrow1DirectionY = connectionDirectionY + (-connectionDirectionX);
-
-                double arrow2DirectionX = connectionDirectionX + (-connectionDirectionY);
-                double arrow2DirectionY = connectionDirectionY + connectionDirectionX;
-
-                double length = Math.Sqrt(arrow1DirectionX * arrow1DirectionX + arrow1DirectionY * arrow1DirectionY);
-
-                arrow1DirectionX = arrow1DirectionX / length * ArrowLength;
-                arrow1DirectionY = arrow1DirectionY / length * ArrowLength;
-                arrow2DirectionX = arrow2DirectionX / length * ArrowLength;
-                arrow2DirectionY = arrow2DirectionY / length * ArrowLength;
-
-                Connection2ArrowVector1X = NextBlockOptional.ConnectionInputX + arrow1DirectionX;
-                Connection2ArrowVector1Y = NextBlockOptional.ConnectionInputY + arrow1DirectionY;
-                Connection2ArrowVector2X = NextBlockOptional.ConnectionInputX + arrow2DirectionX;
-                Connection2ArrowVector2Y = NextBlockOptional.ConnectionInputY + arrow2DirectionY;
+                Connection2ArrowVector1X = NextBlockOptional.ConnectionInputX - ArrowLength;
+                Connection2ArrowVector1Y = NextBlockOptional.ConnectionInputY - ArrowLength;
+                Connection2ArrowVector2X = NextBlockOptional.ConnectionInputX + ArrowLength;
+                Connection2ArrowVector2Y = NextBlockOptional.ConnectionInputY - ArrowLength;
             }
         }
 
@@ -365,14 +358,16 @@ namespace Comma_Dot_Visual_Language.Blocks
                 NextBlockPrimary = block;
                 NextBlockPrimary.PreviousBlocks.Add(this);
 
-                _lineConnectionPrimary = CreateConnectionLine(block, 1);
+                _lineConnectionPrimary = CreateBezierPath(block, 1);
+                SetBezierCurvesPosition();
             }
             else if (_maxConnectionsCount == 2 && NextBlockOptional == null)
             {
                 NextBlockOptional = block;
                 NextBlockOptional.PreviousBlocks.Add(this);
 
-                _lineConnectionOptional = CreateConnectionLine(block, 2);
+                _lineConnectionOptional = CreateBezierPath(block, 2);
+                SetBezierCurvesPosition();
             }
             else
             {
@@ -380,46 +375,33 @@ namespace Comma_Dot_Visual_Language.Blocks
             }
         }
 
-        private Line CreateConnectionLine(Block secondBlock, int outputIndex)
+        private Path CreateBezierPath(Block secondBlock, int outputIndex)
         {
-            var connectionLine = new Line()
-            {
-                Stroke = Brushes.White
-            };
+            BezierSegment bezier = new BezierSegment(new Point(), new Point(), new Point(), true);
 
-            _canvasBlocks.Children.Add(connectionLine);
+            PathSegmentCollection segmentCollection = new PathSegmentCollection();
+            segmentCollection.Add(bezier);
 
-            var binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("ConnectionOutput" + outputIndex + "X")
-            };
-            connectionLine.SetBinding(Line.X1Property, binding);
+            PathFigure pathFigure = new PathFigure();
+            pathFigure.Segments = segmentCollection;
+            pathFigure.StartPoint = new Point();
 
-            binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("ConnectionOutput" + outputIndex + "Y")
-            };
-            connectionLine.SetBinding(Line.Y1Property, binding);
+            PathFigureCollection figureCollection = new PathFigureCollection();
+            figureCollection.Add(pathFigure);
 
-            binding = new Binding
-            {
-                Source = secondBlock,
-                Path = new PropertyPath("ConnectionInputX")
-            };
-            connectionLine.SetBinding(Line.X2Property, binding);
+            PathGeometry pathGeometry = new PathGeometry();
+            pathGeometry.Figures = figureCollection;
 
-            binding = new Binding
-            {
-                Source = secondBlock,
-                Path = new PropertyPath("ConnectionInputY")
-            };
-            connectionLine.SetBinding(Line.Y2Property, binding);
+            Path path = new Path();
+            path.Data = pathGeometry;
+            path.Stroke = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            path.StrokeThickness = 2;
+
+            _canvasBlocks.Children.Add(path);
 
             createConnectionArrow(secondBlock, outputIndex);
 
-            return connectionLine;
+            return path;
         }
 
         private void createConnectionArrow(Block secondBlock, int outputIndex)
