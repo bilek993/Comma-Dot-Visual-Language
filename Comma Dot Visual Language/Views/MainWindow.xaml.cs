@@ -68,12 +68,12 @@ namespace Comma_Dot_Visual_Language.Views
 
         private void ButtonRemoveConnectionPrimaryClick(object sender, RoutedEventArgs e)
         {
-            _propertiesManager.RemoveConnection(0);
+            _blockManager.RemoveConnection(_propertiesManager.SelectedBlock, 0);
         }
 
         private void ButtonRemoveConnectionOptionalClick(object sender, RoutedEventArgs e)
         {
-            _propertiesManager.RemoveConnection(1);
+            _blockManager.RemoveConnection(_propertiesManager.SelectedBlock, 1);
         }
 
         private void MenuRunClick(object sender, RoutedEventArgs e)
@@ -97,6 +97,11 @@ namespace Comma_Dot_Visual_Language.Views
         private void MenuCloseAppClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void ButtnRemoveBlockClick(object sender, RoutedEventArgs e)
+        {
+            _blockManager.RemoveBlock(_propertiesManager.SelectedBlock);
         }
     }
 }

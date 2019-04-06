@@ -81,7 +81,7 @@
                             <ComboBoxItem>String</ComboBoxItem>
                         </ComboBox>
                     </DockPanel>
-                    <Button Content="Remove block" Margin="10,10,10,10"/>
+                    <Button Content="Remove block" Margin="10,10,10,10" Click="ButtnRemoveBlockClick"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

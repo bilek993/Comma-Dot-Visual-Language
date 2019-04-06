@@ -6,7 +6,7 @@ namespace Comma_Dot_Visual_Language.Helpers
 {
     public class PropertiesManager
     {
-        public Block SelectedBlock { private get; set; }
+        public Block SelectedBlock { get; set; }
 
         private readonly Label _labelId;
         private readonly Label _labelOutputPrimary;
@@ -96,12 +96,6 @@ namespace Comma_Dot_Visual_Language.Helpers
 
             var inputBlock = (InputBlock) SelectedBlock;
             inputBlock.VarType = (VariableType)value;
-        }
-
-        public void RemoveConnection(int connectionId)
-        {
-            SelectedBlock.RemoveLine(connectionId);
-            Update();
         }
     }
 }

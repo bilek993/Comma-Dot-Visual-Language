@@ -75,5 +75,38 @@ namespace Comma_Dot_Visual_Language.Helpers
             SecondBlockForConnection = null;
             IsAddConnectionMode = false;
         }
+
+        public void RemoveConnection(Block block, int connectionId)
+        {
+            block.RemoveLine(connectionId);
+            _propertiesManager.Update();
+        }
+
+        public void RemoveBlock(Block block)
+        {
+            RemoveConnection(block, 0);
+            RemoveConnection(block, 1);
+
+            foreach (var previousBlock in block.PreviousBlocks)
+            {
+                int index = -1;
+                if (previousBlock.NextBlockPrimary == block)
+                {
+                    index = 0;
+                }
+                else if (previousBlock.NextBlockOptional == block)
+                {
+                    index = 1;
+                }
+                RemoveConnection(previousBlock, index);
+            }
+
+            block.RemoveFromCanvas();
+            _blocks.Remove(block);
+
+            _propertiesManager.SelectedBlock = StartBlock;
+
+            _propertiesManager.Update();
+        }
     }
 }

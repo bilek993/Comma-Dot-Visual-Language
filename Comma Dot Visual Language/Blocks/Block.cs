@@ -205,6 +205,11 @@ namespace Comma_Dot_Visual_Language.Blocks
             _canvasBlocks.Children.Add(Shape);
             ChildrenAddEvents();
         }
+        public void RemoveFromCanvas()
+        {
+            _canvasBlocks.Children.Remove(Shape);
+            _canvasBlocks.Children.Remove(_textBlockCommand);
+        }
 
         protected void AddTextBlockToCanvas(string prefix = "", string suffix = "")
         {
