@@ -84,12 +84,18 @@ namespace Comma_Dot_Visual_Language.Helpers
 
         public void RemoveBlock(Block block)
         {
+            if (block is BeginBlock)
+            {
+                MessageBox.Show("Begin block cannot be removed, because new instance of this block cannot be added from menu.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             RemoveConnection(block, 0);
             RemoveConnection(block, 1);
 
             foreach (var previousBlock in block.PreviousBlocks)
             {
-                int index = -1;
+                var index = -1;
                 if (previousBlock.NextBlockPrimary == block)
                 {
                     index = 0;
