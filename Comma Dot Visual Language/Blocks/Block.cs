@@ -285,7 +285,14 @@ namespace Comma_Dot_Visual_Language.Blocks
                 if (NextBlockPrimary.ConnectionInputY < ConnectionOutput1Y)
                 {
                     xMod = (ConnectionOutput1X - NextBlockPrimary.ConnectionInputX);
-                    xMod = xMod / Math.Abs(xMod) * 200;
+                    if (xMod != 0)
+                    {
+                        xMod = xMod / Math.Abs(xMod) * 200;
+                    }
+                    else
+                    {
+                        xMod = 200;
+                    }
                 }
 
                 pathGeometry.Figures[0].StartPoint = new Point(ConnectionOutput1X, ConnectionOutput1Y);
@@ -299,10 +306,13 @@ namespace Comma_Dot_Visual_Language.Blocks
                 var pathGeometry = _lineConnectionOptional.Data as PathGeometry;
 
                 double xMod = 0;
-                if (NextBlockOptional.ConnectionInputY < ConnectionOutput2Y)
+                if (xMod != 0)
                 {
-                    xMod = (ConnectionOutput2X - NextBlockOptional.ConnectionInputX);
                     xMod = xMod / Math.Abs(xMod) * 200;
+                }
+                else
+                {
+                    xMod = 200;
                 }
 
                 pathGeometry.Figures[0].StartPoint = new Point(ConnectionOutput2X, ConnectionOutput2Y);
