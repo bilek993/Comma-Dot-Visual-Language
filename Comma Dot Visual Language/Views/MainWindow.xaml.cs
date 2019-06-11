@@ -1,7 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml;
+using System.Xml.Serialization;
+using Comma_Dot_Visual_Language.Blocks;
 using Comma_Dot_Visual_Language.Helpers;
 
 namespace Comma_Dot_Visual_Language.Views
@@ -11,9 +16,9 @@ namespace Comma_Dot_Visual_Language.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly BlockManager _blockManager;
-        private readonly PropertiesManager _propertiesManager;
-        private readonly Runner _runner;
+        private BlockManager _blockManager;
+        private PropertiesManager _propertiesManager;
+        private Runner _runner;
 
         public MainWindow()
         {
@@ -102,6 +107,67 @@ namespace Comma_Dot_Visual_Language.Views
         private void ButtnRemoveBlockClick(object sender, RoutedEventArgs e)
         {
             _blockManager.RemoveBlock(_propertiesManager.SelectedBlock);
+        }
+
+        private void MenuItemSaveClick(object sender, RoutedEventArgs e)
+        {
+            XmlWriter xmlWriter = XmlWriter.Create("file.xml");
+
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("program");
+            {
+
+                xmlWriter.WriteStartElement("blocks");
+                {
+                    foreach (var block in _blockManager.GetBlocks())
+                    {
+                        xmlWriter.WriteStartElement("block");
+                        xmlWriter.WriteAttributeString("type", block.GetType().Name);
+                        xmlWriter.WriteAttributeString("id", block.Id.ToString());
+                        xmlWriter.WriteAttributeString("x", block.getPositionX().ToString());
+                        xmlWriter.WriteAttributeString("y", block.getPositionY().ToString());
+                        xmlWriter.WriteString(block.Command);
+                        xmlWriter.WriteEndElement();
+                    }
+                }
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("connections");
+                {
+                    foreach (var block in _blockManager.GetBlocks())
+                    {
+                        if (block.NextBlockPrimary != null)
+                        {
+                            xmlWriter.WriteStartElement("connection");
+                            xmlWriter.WriteAttributeString("id1", block.Id.ToString());
+                            xmlWriter.WriteAttributeString("id2", block.NextBlockPrimary.Id.ToString());
+                            xmlWriter.WriteEndElement();
+                        }
+                        if (block.NextBlockOptional != null)
+                        {
+                            xmlWriter.WriteStartElement("connection");
+                            xmlWriter.WriteAttributeString("id1", block.Id.ToString());
+                            xmlWriter.WriteAttributeString("id2", block.NextBlockOptional.Id.ToString());
+                            xmlWriter.WriteEndElement();
+                        }
+                    }
+                }
+                xmlWriter.WriteEndElement();
+            }
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+
+        private void MenuItemNewClick(object sender, RoutedEventArgs e)
+        {
+            CanvasBlocks.Children.Clear();
+            Block.ResetBlocksCounter();
+
+            _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
+            _propertiesManager.SelectedBlock = _blockManager.CreateBasicBlocks();
+            _propertiesManager.Update();
+
+            _runner = new Runner();
         }
     }
 }

@@ -265,6 +265,16 @@ namespace Comma_Dot_Visual_Language.Blocks
             }
         }
 
+        public double getPositionX()
+        {
+            return Canvas.GetLeft(Shape);
+        }
+
+        public double getPositionY()
+        {
+            return Canvas.GetTop(Shape);
+        }
+
         protected virtual void SetConnectionsPositions(double shapeLeft, double shapeTop)
         {
 
@@ -551,5 +561,10 @@ namespace Comma_Dot_Visual_Language.Blocks
         }
 
         public abstract Block Run();
+
+        public static void ResetBlocksCounter()
+        {
+            _blocksCounter = 0;
+        }
     }
 }
