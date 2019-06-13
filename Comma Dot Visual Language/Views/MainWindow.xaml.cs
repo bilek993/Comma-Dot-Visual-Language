@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Comma_Dot_Visual_Language.Blocks;
 using Comma_Dot_Visual_Language.Helpers;
+using Microsoft.Win32;
 
 namespace Comma_Dot_Visual_Language.Views
 {
@@ -123,14 +124,30 @@ namespace Comma_Dot_Visual_Language.Views
 
         private void MenuItemSaveClick(object sender, RoutedEventArgs e)
         {
-            saveToFile("file.xml");
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "Xml file (*.xml)|*.xml"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                saveToFile(dialog.FileName);
+            }
         }
 
         private void MenuItemOpenClick(object sender, RoutedEventArgs e)
         {
-            MenuItemNewClick(sender, e);
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Filter = "Xml file (*.xml)|*.xml"
+            };
 
-            openFromFile("file.xml");
+            if (dialog.ShowDialog() == true)
+            {
+                MenuItemNewClick(sender, e);
+
+                openFromFile(dialog.FileName);
+            }
         }
 
         private void saveToFile(string fileName)
