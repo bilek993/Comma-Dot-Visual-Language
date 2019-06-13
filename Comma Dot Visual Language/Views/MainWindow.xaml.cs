@@ -145,11 +145,18 @@ namespace Comma_Dot_Visual_Language.Views
                 {
                     foreach (var block in _blockManager.GetBlocks())
                     {
+                        string blockType = block.GetType().Name;
                         xmlWriter.WriteStartElement("block");
-                        xmlWriter.WriteAttributeString("type", block.GetType().Name);
+                        xmlWriter.WriteAttributeString("type", blockType);
                         xmlWriter.WriteAttributeString("id", block.Id.ToString());
                         xmlWriter.WriteAttributeString("x", block.getPositionX().ToString());
                         xmlWriter.WriteAttributeString("y", block.getPositionY().ToString());
+
+                        if (blockType.Equals("InputBlock"))
+                        {
+                            xmlWriter.WriteAttributeString("varType", ((InputBlock)block).VarType.ToString());
+                        }
+
                         xmlWriter.WriteString(block.Command);
                         xmlWriter.WriteEndElement();
                     }
@@ -192,6 +199,7 @@ namespace Comma_Dot_Visual_Language.Views
             double x;
             double y;
             string command;
+            string varType;
 
             while (reader.Read())
             {
@@ -206,6 +214,7 @@ namespace Comma_Dot_Visual_Language.Views
                             id = Int32.Parse(reader.GetAttribute("id"));
                             x = Double.Parse(reader.GetAttribute("x"));
                             y = Double.Parse(reader.GetAttribute("y"));
+                            varType = reader.GetAttribute("varType");
 
                             if (blockType.Equals("BeginBlock"))
                             {
@@ -225,7 +234,9 @@ namespace Comma_Dot_Visual_Language.Views
                             }
                             else if (blockType.Equals("InputBlock"))
                             {
-                                block = new InputBlock(CanvasBlocks, _propertiesManager, id);
+                                InputBlock b = new InputBlock(CanvasBlocks, _propertiesManager, id);
+                                b.VarType = (VariableType)Enum.Parse(typeof(VariableType), varType);
+                                block = b;
                             }
                             else if (blockType.Equals("OutputBlock"))
                             {
