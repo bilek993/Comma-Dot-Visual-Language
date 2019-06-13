@@ -13,6 +13,9 @@ namespace Comma_Dot_Visual_Language.Blocks
 {
     public abstract class Block : INotifyPropertyChanged
     {
+        protected static readonly double width = 162;
+        protected static readonly double height = 89;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; protected set; }
@@ -237,7 +240,7 @@ namespace Comma_Dot_Visual_Language.Blocks
                 return;
 
             var mousePosition = mouseEventArgs.GetPosition(_canvasBlocks);
-            SetPosition(mousePosition.X - (Shape.ActualWidth / 2), mousePosition.Y - (Shape.ActualHeight / 2));
+            SetPosition(mousePosition.X - (width / 2), mousePosition.Y - (height / 2));
         }
 
         public void SetPosition(double left, double top)
@@ -245,7 +248,7 @@ namespace Comma_Dot_Visual_Language.Blocks
             Canvas.SetLeft(Shape, left);
             Canvas.SetTop(Shape, top);
 
-            if (Shape.ActualWidth == 0 || Shape.ActualHeight == 0)
+            if (width == 0 || height == 0)
             {
                 Shape.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 _textBlockCommand.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -278,11 +281,11 @@ namespace Comma_Dot_Visual_Language.Blocks
         protected virtual void SetConnectionsPositions(double shapeLeft, double shapeTop)
         {
 
-            ConnectionInputX = shapeLeft + Shape.ActualWidth / 2;
+            ConnectionInputX = shapeLeft + width / 2;
             ConnectionInputY = shapeTop + 4f;
 
-            ConnectionOutput1X = ConnectionOutput2X = shapeLeft + Shape.ActualWidth / 2;
-            ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + Shape.ActualHeight - 14f;
+            ConnectionOutput1X = ConnectionOutput2X = shapeLeft + width / 2;
+            ConnectionOutput1Y = ConnectionOutput2Y = shapeTop + height - 14f;
         }
 
         private void SetBezierCurvesPosition()
@@ -419,6 +422,9 @@ namespace Comma_Dot_Visual_Language.Blocks
             {
                 MessageBox.Show("You cannot add another connection, because all outputs are already used.", "Connection error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            SetPosition(GetPositionX(), GetPositionY());
+            block.SetPosition(block.GetPositionX(), block.GetPositionY());
         }
 
         private Path CreateBezierPath(Block secondBlock, int outputIndex)
