@@ -223,29 +223,32 @@ namespace Comma_Dot_Visual_Language.Views
                             else if (blockType.Equals("CommandBlock"))
                             {
                                 block = new CommandBlock(CanvasBlocks, _propertiesManager, id);
+                                _blockManager.AddBlock(block);
                             }
                             else if (blockType.Equals("EndBlock"))
                             {
                                 block = new EndBlock(CanvasBlocks, _propertiesManager, id);
+                                _blockManager.AddBlock(block);
                             }
                             else if (blockType.Equals("IfBlock"))
                             {
                                 block = new IfBlock(CanvasBlocks, _propertiesManager, id);
+                                _blockManager.AddBlock(block);
                             }
                             else if (blockType.Equals("InputBlock"))
                             {
                                 InputBlock b = new InputBlock(CanvasBlocks, _propertiesManager, id);
                                 b.VarType = (VariableType)Enum.Parse(typeof(VariableType), varType);
                                 block = b;
+                                _blockManager.AddBlock(block);
                             }
                             else if (blockType.Equals("OutputBlock"))
                             {
                                 block = new OutputBlock(CanvasBlocks, _propertiesManager, id);
+                                _blockManager.AddBlock(block);
                             }
 
                             block.SetPosition(x, y);
-
-                            _blockManager.AddBlock(block);
                         }
                         else if (reader.Name.Equals("connection"))
                         {
