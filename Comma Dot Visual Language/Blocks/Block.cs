@@ -265,12 +265,12 @@ namespace Comma_Dot_Visual_Language.Blocks
             }
         }
 
-        public double getPositionX()
+        public double GetPositionX()
         {
             return Canvas.GetLeft(Shape);
         }
 
-        public double getPositionY()
+        public double GetPositionY()
         {
             return Canvas.GetTop(Shape);
         }
@@ -384,6 +384,9 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         public void AddConnection(Block block)
         {
+            SetPosition(GetPositionX(), GetPositionY());
+            block.SetPosition(block.GetPositionX(), block.GetPositionY());
+
             if (this == block)
             {
                 MessageBox.Show("Self connection is not possible due to potential endless loop.","Connection error!",MessageBoxButton.OK,MessageBoxImage.Error);
@@ -442,12 +445,12 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             _canvasBlocks.Children.Add(path);
 
-            createConnectionArrow(secondBlock, outputIndex);
+            CreateConnectionArrow(secondBlock, outputIndex);
 
             return path;
         }
 
-        private void createConnectionArrow(Block secondBlock, int outputIndex)
+        private void CreateConnectionArrow(Block secondBlock, int outputIndex)
         {
             var arrowLine1 = new Line()
             {

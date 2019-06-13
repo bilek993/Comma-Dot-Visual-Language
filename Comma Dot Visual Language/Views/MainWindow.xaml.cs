@@ -149,8 +149,8 @@ namespace Comma_Dot_Visual_Language.Views
                         xmlWriter.WriteStartElement("block");
                         xmlWriter.WriteAttributeString("type", blockType);
                         xmlWriter.WriteAttributeString("id", block.Id.ToString());
-                        xmlWriter.WriteAttributeString("x", block.getPositionX().ToString());
-                        xmlWriter.WriteAttributeString("y", block.getPositionY().ToString());
+                        xmlWriter.WriteAttributeString("x", block.GetPositionX().ToString());
+                        xmlWriter.WriteAttributeString("y", block.GetPositionY().ToString());
 
                         if (blockType.Equals("InputBlock"))
                         {
@@ -249,7 +249,13 @@ namespace Comma_Dot_Visual_Language.Views
                         }
                         else if (reader.Name.Equals("connection"))
                         {
+                            int id1 = Int32.Parse(reader.GetAttribute("id1"));
+                            int id2 = Int32.Parse(reader.GetAttribute("id2"));
 
+                            Block block1 = _blockManager.FindBlockById(id1);
+                            Block block2 = _blockManager.FindBlockById(id2);
+
+                            block1.AddConnection(block2);
                         }
 
                         break;

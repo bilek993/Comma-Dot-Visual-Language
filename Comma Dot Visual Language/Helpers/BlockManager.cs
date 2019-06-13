@@ -124,5 +124,10 @@ namespace Comma_Dot_Visual_Language.Helpers
 
             _propertiesManager.Update();
         }
+
+        public Block FindBlockById(int id)
+        {
+            return _blocks.Find(block => block.Id == id);
+        }
     }
 }
