@@ -31,6 +31,11 @@ namespace Comma_Dot_Visual_Language.Helpers
             return _blocks;
         }
 
+        public void AddBlock(Block block)
+        {
+            _blocks.Add(block);
+        }
+
         public Block CreateBasicBlocks()
         {
             _blocks.Add(new BeginBlock(_canvasBlocks, _propertiesManager));

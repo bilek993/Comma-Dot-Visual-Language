@@ -109,9 +109,33 @@ namespace Comma_Dot_Visual_Language.Views
             _blockManager.RemoveBlock(_propertiesManager.SelectedBlock);
         }
 
+        private void MenuItemNewClick(object sender, RoutedEventArgs e)
+        {
+            CanvasBlocks.Children.Clear();
+            Block.ResetBlocksCounter();
+
+            _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
+            _propertiesManager.SelectedBlock = _blockManager.CreateBasicBlocks();
+            _propertiesManager.Update();
+
+            _runner = new Runner();
+        }
+
         private void MenuItemSaveClick(object sender, RoutedEventArgs e)
         {
-            XmlWriter xmlWriter = XmlWriter.Create("file.xml");
+            saveToFile("file.xml");
+        }
+
+        private void MenuItemOpenClick(object sender, RoutedEventArgs e)
+        {
+            MenuItemNewClick(sender, e);
+
+            openFromFile("file.xml");
+        }
+
+        private void saveToFile(string fileName)
+        {
+            XmlWriter xmlWriter = XmlWriter.Create(fileName);
 
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("program");
@@ -158,16 +182,78 @@ namespace Comma_Dot_Visual_Language.Views
             xmlWriter.Close();
         }
 
-        private void MenuItemNewClick(object sender, RoutedEventArgs e)
+        private void openFromFile(string fileName)
         {
-            CanvasBlocks.Children.Clear();
-            Block.ResetBlocksCounter();
+            XmlTextReader reader = new XmlTextReader(fileName);
 
-            _blockManager = new BlockManager(CanvasBlocks, _propertiesManager);
-            _propertiesManager.SelectedBlock = _blockManager.CreateBasicBlocks();
-            _propertiesManager.Update();
+            Block block = null;
+            string blockType;
+            int id;
+            double x;
+            double y;
+            string command;
 
-            _runner = new Runner();
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        if (reader.Name.Equals("block"))
+                        {
+                            block = null;
+
+                            blockType = reader.GetAttribute("type");
+                            id = Int32.Parse(reader.GetAttribute("id"));
+                            x = Double.Parse(reader.GetAttribute("x"));
+                            y = Double.Parse(reader.GetAttribute("y"));
+
+                            if (blockType.Equals("BeginBlock"))
+                            {
+                                block = _blockManager.StartBlock;
+                            }
+                            else if (blockType.Equals("CommandBlock"))
+                            {
+                                block = new CommandBlock(CanvasBlocks, _propertiesManager, id);
+                            }
+                            else if (blockType.Equals("EndBlock"))
+                            {
+                                block = new EndBlock(CanvasBlocks, _propertiesManager, id);
+                            }
+                            else if (blockType.Equals("IfBlock"))
+                            {
+                                block = new IfBlock(CanvasBlocks, _propertiesManager, id);
+                            }
+                            else if (blockType.Equals("InputBlock"))
+                            {
+                                block = new InputBlock(CanvasBlocks, _propertiesManager, id);
+                            }
+                            else if (blockType.Equals("OutputBlock"))
+                            {
+                                block = new OutputBlock(CanvasBlocks, _propertiesManager, id);
+                            }
+
+                            block.SetPosition(x, y);
+
+                            _blockManager.AddBlock(block);
+                        }
+                        else if (reader.Name.Equals("connection"))
+                        {
+
+                        }
+
+                        break;
+                    case XmlNodeType.Text:
+                        command = reader.Value;
+                        block.Command = command;
+
+                        break;
+                    case XmlNodeType.EndElement:
+
+                        break;
+                }
+            }
+
+            reader.Close();
         }
     }
 }

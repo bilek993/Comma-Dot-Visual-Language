@@ -29,6 +29,19 @@ namespace Comma_Dot_Visual_Language.Blocks
             VarType = 0;
         }
 
+        public InputBlock(Canvas canvas, PropertiesManager propertiesManager, int id) : base(canvas, 1, propertiesManager)
+        {
+            Id = id;
+            _blocksCounter = Id + 1;
+
+            Shape = ImageGenerator.GenerateBlockImage("io_block");
+
+            AddShapeToCanvas();
+            AddTextBlockToCanvas("Input: ");
+
+            VarType = 0;
+        }
+
         public override Block Run()
         {
             string variableValue;

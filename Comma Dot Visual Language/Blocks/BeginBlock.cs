@@ -16,6 +16,13 @@ namespace Comma_Dot_Visual_Language.Blocks
             AddTextBlockToCanvas();
         }
 
+        public BeginBlock(Canvas canvas, PropertiesManager propertiesManager, int id)
+            : this(canvas, propertiesManager)
+        {
+            Id = id;
+            _blocksCounter = Id + 1;
+        }
+
         public override Block Run()
         {
             return NextBlockPrimary;

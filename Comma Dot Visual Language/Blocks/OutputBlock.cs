@@ -17,6 +17,17 @@ namespace Comma_Dot_Visual_Language.Blocks
             OnMouseLeftButtonDown(null, null);
         }
 
+        public OutputBlock(Canvas canvas, PropertiesManager propertiesManager, int id) : base(canvas, 1, propertiesManager)
+        {
+            Id = id;
+            _blocksCounter = Id + 1;
+
+            Shape = ImageGenerator.GenerateBlockImage("io_block");
+
+            AddShapeToCanvas();
+            AddTextBlockToCanvas("Output: ");
+        }
+
         public override Block Run()
         {
             MessageBox.Show(Runner.Variables[Command].ToString(), "Output");

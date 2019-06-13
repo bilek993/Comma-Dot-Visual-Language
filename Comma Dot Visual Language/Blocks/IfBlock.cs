@@ -19,6 +19,17 @@ namespace Comma_Dot_Visual_Language.Blocks
             OnMouseLeftButtonDown(null, null);
         }
 
+        public IfBlock(Canvas canvas, PropertiesManager propertiesManager, int id) : base(canvas, 2, propertiesManager)
+        {
+            Id = id;
+            _blocksCounter = Id + 1;
+
+            Shape = ImageGenerator.GenerateBlockImage("if_block");
+
+            AddShapeToCanvas();
+            AddTextBlockToCanvas("if (", ")");
+        }
+
         protected override void SetConnectionsPositions(double shapeLeft, double shapeTop)
         {
             ConnectionInputX = shapeLeft + Shape.ActualWidth / 2;

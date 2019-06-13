@@ -15,7 +15,7 @@ namespace Comma_Dot_Visual_Language.Blocks
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Id { get; private set; }
+        public int Id { get; protected set; }
         public Block NextBlockPrimary { get; private set; }
         public Block NextBlockOptional { get; private set; }
         public List<Block> PreviousBlocks { get; private set; }
@@ -52,7 +52,7 @@ namespace Comma_Dot_Visual_Language.Blocks
         private bool _isPressed;
         private readonly Canvas _canvasBlocks;
         private readonly int _maxConnectionsCount;
-        private static int _blocksCounter = 0;
+        protected static int _blocksCounter = 0;
 
         public string Command
         {

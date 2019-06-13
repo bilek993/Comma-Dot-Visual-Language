@@ -20,6 +20,17 @@ namespace Comma_Dot_Visual_Language.Blocks
             OnMouseLeftButtonDown(null, null);
         }
 
+        public CommandBlock(Canvas canvas, PropertiesManager propertiesManager, int id) : base(canvas, 1, propertiesManager)
+        {
+            Id = id;
+            _blocksCounter = Id + 1;
+
+            Shape = ImageGenerator.GenerateBlockImage("command_block");
+
+            AddShapeToCanvas();
+            AddTextBlockToCanvas();
+        }
+
         private static void ExceptionHasArguments(string[] arguments)
         {
             if (!(arguments.Length == 1 && arguments[0] == ""))
