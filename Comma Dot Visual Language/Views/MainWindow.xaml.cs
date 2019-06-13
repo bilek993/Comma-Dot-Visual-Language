@@ -152,7 +152,12 @@ namespace Comma_Dot_Visual_Language.Views
 
         private void saveToFile(string fileName)
         {
-            XmlWriter xmlWriter = XmlWriter.Create(fileName);
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "     ";
+            settings.OmitXmlDeclaration = true;
+
+            XmlWriter xmlWriter = XmlWriter.Create(fileName, settings);
 
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("program");
