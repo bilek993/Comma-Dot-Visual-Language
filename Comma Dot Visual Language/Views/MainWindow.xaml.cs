@@ -297,5 +297,32 @@ namespace Comma_Dot_Visual_Language.Views
 
             reader.Close();
         }
+
+        private double ScaleRate = 1.2;
+
+        private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                if (e.Delta > 0)
+                {
+                    st.ScaleX *= ScaleRate;
+                    st.ScaleY *= ScaleRate;
+                }
+                else
+                {
+                    st.ScaleX /= ScaleRate;
+                    st.ScaleY /= ScaleRate;
+                }
+            }
+        }
+
+        void Scroller_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

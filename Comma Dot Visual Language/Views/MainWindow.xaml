@@ -43,15 +43,20 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.ColumnSpan="3" BorderBrush="#404040" BorderThickness="1">
-                <ScrollViewer ClipToBounds="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                    <Canvas Name="CanvasBlocks" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="5000" Height="5000">
-                        <Canvas.Background>
-                            <ImageBrush ImageSource="../Images/background.png" 
+                <ScrollViewer Name="Scroller" ClipToBounds="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                    <Border MouseWheel="Scroller_MouseWheel" Background="#01b0b0b0">
+                        <Canvas Name="CanvasBlocks" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="5000" Height="5000" MouseWheel="Canvas_MouseWheel">
+                            <Canvas.LayoutTransform>
+                                <ScaleTransform x:Name="st"/>
+                            </Canvas.LayoutTransform>
+                            <Canvas.Background>
+                                <ImageBrush ImageSource="../Images/background.png" 
                                     TileMode="FlipXY"
                                     Viewport="0,0,50,50"
                                     ViewportUnits="Absolute"/>
-                        </Canvas.Background>
-                    </Canvas>
+                            </Canvas.Background>
+                        </Canvas>
+                    </Border>
                 </ScrollViewer>
             </Border>
             <ScrollViewer Grid.Column="3" Background="#404040">
