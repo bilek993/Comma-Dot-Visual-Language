@@ -48,7 +48,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
             do
             {
-                variableValue = Microsoft.VisualBasic.Interaction.InputBox("Enter variable value:", "Input");
+                variableValue = Microsoft.VisualBasic.Interaction.InputBox("Enter variable value:", "Input: " + Command);
             } while (string.IsNullOrWhiteSpace(variableValue));
 
             switch (VarType)

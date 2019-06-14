@@ -92,5 +92,21 @@ namespace Comma_Dot_Visual_Language.Helpers
 
             Runner.Variables[returnedVariable] = (int)Runner.Variables[arguments[0]] % (int)Runner.Variables[arguments[1]];
         }
+
+        public static void Sqrt(string returnedVariable, string[] arguments)
+        {
+            if (arguments.Length != 1 || Runner.Variables[arguments[0]].GetType() == typeof(string))
+                throw new ArgumentException();
+
+            switch (Runner.Variables[returnedVariable])
+            {
+                case int _:
+                    Runner.Variables[returnedVariable] = (int)Math.Sqrt((int)Runner.Variables[arguments[0]]);
+                    break;
+                case float _:
+                    Runner.Variables[returnedVariable] = (float)Math.Sqrt((float)Runner.Variables[arguments[0]]);
+                    break;
+            }
+        }
     }
 }

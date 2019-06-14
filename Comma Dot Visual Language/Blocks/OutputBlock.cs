@@ -30,7 +30,7 @@ namespace Comma_Dot_Visual_Language.Blocks
 
         public override Block Run()
         {
-            MessageBox.Show(Runner.Variables[Command].ToString(), "Output");
+            MessageBox.Show(Runner.Variables[Command].ToString(), "Output: " + Command);
 
             return NextBlockPrimary;
         }

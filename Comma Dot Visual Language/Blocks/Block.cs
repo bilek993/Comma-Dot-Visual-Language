@@ -295,7 +295,7 @@ namespace Comma_Dot_Visual_Language.Blocks
                 var pathGeometry = _lineConnectionPrimary.Data as PathGeometry;
 
                 double xMod = 0;
-                if (NextBlockPrimary.ConnectionInputY < ConnectionOutput1Y)
+                if (NextBlockPrimary.ConnectionInputY < ConnectionInputY)
                 {
                     xMod = (ConnectionOutput1X - NextBlockPrimary.ConnectionInputX);
                     if (xMod != 0)
@@ -319,7 +319,7 @@ namespace Comma_Dot_Visual_Language.Blocks
                 var pathGeometry = _lineConnectionOptional.Data as PathGeometry;
 
                 double xMod = 0;
-                if (NextBlockOptional.ConnectionInputY < ConnectionOutput2Y)
+                if (NextBlockOptional.ConnectionInputY < ConnectionInputY)
                 {
                     xMod = (ConnectionOutput2X - NextBlockOptional.ConnectionInputX);
                     if (xMod != 0)

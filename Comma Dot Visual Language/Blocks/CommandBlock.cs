@@ -86,6 +86,10 @@ namespace Comma_Dot_Visual_Language.Blocks
                         CommandExecution.Modulo(matchedReturnedVariable, arguments);
                         break;
 
+                    case "Sqrt":
+                        CommandExecution.Sqrt(matchedReturnedVariable, arguments);
+                        break;
+
                     default:
                         throw new InvalidOperationException();
                 }
