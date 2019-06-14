@@ -43,14 +43,16 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.ColumnSpan="3" BorderBrush="#404040" BorderThickness="1">
-                <Canvas Name="CanvasBlocks" ClipToBounds="True">
-                    <Canvas.Background>
-                        <ImageBrush ImageSource="../Images/background.png" 
+                <ScrollViewer ClipToBounds="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                    <Canvas Name="CanvasBlocks" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="5000" Height="5000">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="../Images/background.png" 
                                     TileMode="FlipXY"
                                     Viewport="0,0,50,50"
                                     ViewportUnits="Absolute"/>
-                    </Canvas.Background>
-                </Canvas>
+                        </Canvas.Background>
+                    </Canvas>
+                </ScrollViewer>
             </Border>
             <ScrollViewer Grid.Column="3" Background="#404040">
                 <StackPanel>
